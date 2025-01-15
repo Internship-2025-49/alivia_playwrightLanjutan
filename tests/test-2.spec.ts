@@ -3,9 +3,9 @@ import { test, expect } from "@playwright/test";
 test("test", async ({ page }) => {
   await page.goto("http://127.0.0.1:8000/login");
   await page.getByPlaceholder("Masukkan Username").click();
-  await page.getByPlaceholder("Masukkan Username").fill("admin");
+  await page.getByPlaceholder("Masukkan Username").fill("adilla");
   await page.getByPlaceholder("Masukkan Password").click();
-  await page.getByPlaceholder("Masukkan Password").fill("admin123");
+  await page.getByPlaceholder("Masukkan Password").fill("adilla123");
   await page.getByRole("button", { name: "Masuk" }).click();
   await page.getByRole("link", { name: " Pasien" }).click();
   await page.getByRole("link", { name: " Tambah Pasien" }).click();
