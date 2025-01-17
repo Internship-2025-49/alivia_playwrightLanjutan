@@ -1,18 +1,64 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { PlaywrightLoginPage } from "./auth/login";
+import { PlaywrightDashboardPage } from "./dashboard/dashboard";
+import { PlaywrightPasienPage } from "./dashboard/pasien";
+import { describe } from "node:test";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+const username = "admin";
+const password = "admin123";
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+// test("playwright login", async ({ page }) => {
+//   const loginPage = new PlaywrightLoginPage(page);
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+//   await page.goto("http://127.0.0.1:8000/");
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+//   await loginPage.login(); // Melakukan login dengan username dan password
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+//   // Verifikasi bahwa login berhasil (misalnya dengan memeriksa URL atau elemen lain)
+//   await expect(page).toHaveURL("http://127.0.0.1:8000/dashboard"); // Gantilah URL ini sesuai aplikasi Anda
+// });
+
+// test("playwright pasien", async ({ page }) => {
+//   const loginPage = new PlaywrightLoginPage(page);
+//   const pasienPage = new PlaywrightPasienPage(page);
+
+//   await loginPage.login(); // Melakukan login dengan username dan password
+
+//   // Verifikasi bahwa login berhasil (misalnya dengan memeriksa URL atau elemen lain)
+//   await expect(page).toHaveURL("http://127.0.0.1:8000/dashboard");
+
+//   await pasienPage.tambahPasien({
+//     namaPasien: "lipiuu",
+//     jenisKelamin: "P",
+//     agama: "Hindu",
+//     alamat: "jl kom mutiara",
+//     tanggalLahir: "2025-01-16",
+//     usia: "12",
+//     nomorTelepon: "34567890",
+//     namaKepalaKeluarga: "345678",
+//     hubunganKeluarga: "56gywgd",
+//   });
+
+//   // Verifikasi bahwa pasien berhasil ditambahkan, misalnya dengan memeriksa ada tidaknya pasien di halaman
+//   await expect(page).toHaveURL("http://127.0.0.1:8000/pasiens"); // Gantilah URL ini sesuai aplikasi Anda
+// });
+
+test.describe("RekamMedis_Alivia", () => {
+  let loginPage: PlaywrightLoginPage;
+  let dashboardPage: PlaywrightDashboardPage;
+  let pasienPage: PlaywrightPasienPage;
+
+  test.beforeEach(async ({ page }) => {
+    loginPage = new PlaywrightLoginPage(page);
+    dashboardPage = new PlaywrightDashboardPage(page);
+    pasienPage = new PlaywrightPasienPage(page);
+
+    await page.goto("http://127.0.0.1:8000");
+
+    // await loginPage.toLoginPage();
+    // await loginPage.inputLogin("shita@gmail.com", "shita123");
+    // await expect(page).toHaveURL("http://127.0.0.1:8000/home");
+  });
+
+  test;
 });
