@@ -1,64 +1,53 @@
 import { test, expect } from "@playwright/test";
 import { PlaywrightLoginPage } from "./auth/login";
 import { PlaywrightDashboardPage } from "./dashboard/dashboard";
-import { PlaywrightPasienPage } from "./dashboard/pasien";
+import { PlaywrightSidebarPage } from "./dashboard/sidebar";
+import { PlaywrightIsianFormPage } from "./dashboard/isiform";
+import { PlaywrightDetailPage } from "./dashboard/detail";
 import { describe } from "node:test";
 
 const username = "admin";
 const password = "admin123";
 
-// test("playwright login", async ({ page }) => {
-//   const loginPage = new PlaywrightLoginPage(page);
-
-//   await page.goto("http://127.0.0.1:8000/");
-
-//   await loginPage.login(); // Melakukan login dengan username dan password
-
-//   // Verifikasi bahwa login berhasil (misalnya dengan memeriksa URL atau elemen lain)
-//   await expect(page).toHaveURL("http://127.0.0.1:8000/dashboard"); // Gantilah URL ini sesuai aplikasi Anda
-// });
-
-// test("playwright pasien", async ({ page }) => {
-//   const loginPage = new PlaywrightLoginPage(page);
-//   const pasienPage = new PlaywrightPasienPage(page);
-
-//   await loginPage.login(); // Melakukan login dengan username dan password
-
-//   // Verifikasi bahwa login berhasil (misalnya dengan memeriksa URL atau elemen lain)
-//   await expect(page).toHaveURL("http://127.0.0.1:8000/dashboard");
-
-//   await pasienPage.tambahPasien({
-//     namaPasien: "lipiuu",
-//     jenisKelamin: "P",
-//     agama: "Hindu",
-//     alamat: "jl kom mutiara",
-//     tanggalLahir: "2025-01-16",
-//     usia: "12",
-//     nomorTelepon: "34567890",
-//     namaKepalaKeluarga: "345678",
-//     hubunganKeluarga: "56gywgd",
-//   });
-
-//   // Verifikasi bahwa pasien berhasil ditambahkan, misalnya dengan memeriksa ada tidaknya pasien di halaman
-//   await expect(page).toHaveURL("http://127.0.0.1:8000/pasiens"); // Gantilah URL ini sesuai aplikasi Anda
-// });
-
 test.describe("RekamMedis_Alivia", () => {
   let loginPage: PlaywrightLoginPage;
   let dashboardPage: PlaywrightDashboardPage;
-  let pasienPage: PlaywrightPasienPage;
+  let sidebarPage: PlaywrightSidebarPage;
+  let isiPage: PlaywrightIsianFormPage;
+  let detailPage: PlaywrightDetailPage;
 
   test.beforeEach(async ({ page }) => {
     loginPage = new PlaywrightLoginPage(page);
     dashboardPage = new PlaywrightDashboardPage(page);
-    pasienPage = new PlaywrightPasienPage(page);
+    sidebarPage = new PlaywrightSidebarPage(page);
+    isiPage = new PlaywrightIsianFormPage(page);
+    detailPage = new PlaywrightDetailPage(page);
 
     await page.goto("http://127.0.0.1:8000");
 
-    // await loginPage.toLoginPage();
-    // await loginPage.inputLogin("shita@gmail.com", "shita123");
-    // await expect(page).toHaveURL("http://127.0.0.1:8000/home");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin("admin", "admin123");
+    await expect(page).toHaveURL("http://127.0.0.1:8000/dashboard");
   });
 
-  test;
+  test("User Dashboard Page", async ({ page }) => {
+    await dashboardPage.header();
+    await dashboardPage.title();
+
+    await sidebarPage.cekPasien();
+    await dashboardPage.pasien();
+    await dashboardPage.checkTambahPasien();
+    await isiPage.isiFormPasien();
+    await detailPage.bacaDataPasien();
+
+    await sidebarPage.cekRekamMedis();
+    await dashboardPage.rekamMedis();
+    await dashboardPage.checkTambahRekamMedis();
+    await isiPage.isiFormRekamMedis();
+
+    await dashboardPage.Tindakan();
+    await sidebarPage.cekTindakan();
+    await dashboardPage.checkTambahTindakan();
+    await isiPage.isiFormTindakan();
+  });
 });
