@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import { faker } from "@faker-js/faker/locale/id_ID";
 
 export class PlaywrightIsianFormPage {
   readonly page: Page;
@@ -64,10 +65,12 @@ export class PlaywrightIsianFormPage {
   }
 
   async isiFormPasien() {
-    await this.namaPasienInput.fill("John Doe");
+    const nama = faker.person.fullName();
+    const alamat = faker.location.streetAddress();
+    await this.namaPasienInput.fill(nama);
     await this.jenisKelaminSelect.selectOption("L");
     await this.agamaSelect.selectOption("Islam");
-    await this.alamatTextarea.fill("Jl. Merpati No. 5");
+    await this.alamatTextarea.fill(alamat);
     await this.tanggalLahirInput.fill("1990-05-12");
     await this.usiaInput.fill("30");
     await this.nomorTeleponInput.fill("08123456789");
@@ -77,8 +80,8 @@ export class PlaywrightIsianFormPage {
   }
 
   async isiFormRekamMedis() {
-    await this.pasienSelect.selectOption({ label: "John Doe" }); // Pilih pasien
-    await this.tindakanSelect.selectOption({ label: "Pemeriksaan Umum" });
+    await this.pasienSelect.selectOption({ label: "John Doe" });
+    await this.tindakanSelect.selectOption({ label: "Pembedahan" });
     await this.obatInput.selectOption({ label: "Paracetamol" });
     await this.diagnosaInput.fill("Flu biasa");
     await this.resepTextarea.fill("Obat pereda demam");
@@ -89,7 +92,7 @@ export class PlaywrightIsianFormPage {
   }
 
   async isiFormTindakan() {
-    await this.namaTindakanInput.fill("Pembedahan");
+    await this.namaTindakanInput.fill("Pemeriksaan Umum");
     await this.keteranganTindakanTextarea.fill(
       "Pembedahan kecil untuk pengangkatan benjolan"
     );

@@ -3,6 +3,7 @@ import { expect, type Locator, type Page } from "@playwright/test";
 export class PlaywrightDetailPage {
   readonly page: Page;
 
+  readonly closeButton: Locator;
   // Lokator untuk tombol lihat detail pasien
   readonly lihatDetailPasienButton: Locator;
   readonly modalPasien: Locator;
@@ -22,7 +23,6 @@ export class PlaywrightDetailPage {
   readonly tindakanDetail: Locator;
   readonly obatDetail: Locator;
   readonly diagnosaDetail: Locator;
-  readonly resepDetail: Locator;
   readonly keluhanDetail: Locator;
   readonly tanggalPemeriksaanDetail: Locator;
   readonly keteranganRekamMedisDetail: Locator;
@@ -36,11 +36,17 @@ export class PlaywrightDetailPage {
   constructor(page: Page) {
     this.page = page;
 
+    // Lokator untuk tombol Close pada modal
+    this.closeButton = page.locator(
+      'button.btn.btn-secondary[data-bs-dismiss="modal"]'
+    );
+
     // Lokator untuk tombol lihat detail pasien
 
-    this.lihatDetailPasienButton = page.locator(
-      'button[data-bs-toggle="modal"][data-bs-target="#detailModal"][data-pasien*="John Doe"]'
-    );
+    this.lihatDetailPasienButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
 
     // Lokator untuk modal detail pasien
     this.modalPasien = page.locator("#detailModal");
@@ -57,16 +63,17 @@ export class PlaywrightDetailPage {
     );
 
     // Lokator untuk tombol lihat detail rekam medis
-    this.lihatDetailRekamMedisButton = page.locator(
-      'button[data-bs-toggle="modal"][data-bs-target="#detailModal"] [data-pasien*="John Doe"]'
-    );
+
+    this.lihatDetailRekamMedisButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
 
     // Lokator untuk modal detail rekam medis
     this.modalRekamMedis = page.locator("#detailModal");
     this.tindakanDetail = this.modalRekamMedis.locator("#modalTindakan");
     this.obatDetail = this.modalRekamMedis.locator("#modalObat");
     this.diagnosaDetail = this.modalRekamMedis.locator("#modalDiagnosa");
-    this.resepDetail = this.modalRekamMedis.locator("#modalResep");
     this.keluhanDetail = this.modalRekamMedis.locator("#modalKeluhan");
     this.tanggalPemeriksaanDetail = this.modalRekamMedis.locator(
       "#modalTanggalPemeriksaan"
@@ -74,9 +81,10 @@ export class PlaywrightDetailPage {
     this.keteranganRekamMedisDetail =
       this.modalRekamMedis.locator("#modalKeterangan");
 
-    this.lihatDetailTindakanButton = page.locator(
-      'button[data-bs-toggle="modal"][data-bs-target="#detailModal"][data-pasien*="John Doe"]'
-    );
+    this.lihatDetailTindakanButton = page
+      .getByRole("row", { name: "Pembedahan coba aja   " })
+      .getByRole("button")
+      .first();
 
     this.modalTindakan = page.locator("#detailModal");
     this.namaTindakanDetail = this.modalTindakan.locator("#modalNamaTindakan");
@@ -107,6 +115,9 @@ export class PlaywrightDetailPage {
     console.log("Nomor Telepon: ", nomorTelepon);
     console.log("Nama KK: ", namaKK);
     console.log("Hubungan Keluarga: ", hubunganKeluarga);
+
+    await this.closeButton.click();
+    await this.modalPasien.waitFor({ state: "hidden" });
   }
 
   async bacaDataRekamMedis() {
@@ -116,7 +127,6 @@ export class PlaywrightDetailPage {
     const tindakan = await this.tindakanDetail.textContent();
     const obat = await this.obatDetail.textContent();
     const diagnosa = await this.diagnosaDetail.textContent();
-    const resep = await this.resepDetail.textContent();
     const keluhan = await this.keluhanDetail.textContent();
     const tanggalPemeriksaan =
       await this.tanggalPemeriksaanDetail.textContent();
@@ -125,10 +135,12 @@ export class PlaywrightDetailPage {
     console.log("Tindakan: ", tindakan);
     console.log("Obat: ", obat);
     console.log("Diagnosa: ", diagnosa);
-    console.log("Resep: ", resep);
     console.log("Keluhan: ", keluhan);
     console.log("Tanggal Pemeriksaan: ", tanggalPemeriksaan);
     console.log("Keterangan: ", keterangan);
+
+    await this.closeButton.click();
+    await this.modalRekamMedis.waitFor({ state: "hidden" });
   }
 
   async bacaDataTindakan() {
@@ -141,5 +153,8 @@ export class PlaywrightDetailPage {
 
     console.log("Nama Tindakan: ", namaTindakan);
     console.log("Keterangan Tindakan: ", keteranganTindakan);
+
+    await this.closeButton.click();
+    await this.modalTindakan.waitFor({ state: "hidden" });
   }
 }
