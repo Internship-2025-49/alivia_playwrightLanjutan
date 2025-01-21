@@ -81,7 +81,7 @@ export class PlaywrightIsianFormPage {
 
   async isiFormRekamMedis() {
     await this.pasienSelect.selectOption({ label: "John Doe" });
-    await this.tindakanSelect.selectOption({ label: "Pembedahan" });
+    await this.tindakanSelect.selectOption({ label: "Pemeriksaan Umum" });
     await this.obatInput.selectOption({ label: "Paracetamol" });
     await this.diagnosaInput.fill("Flu biasa");
     await this.resepTextarea.fill("Obat pereda demam");

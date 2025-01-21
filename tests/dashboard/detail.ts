@@ -82,7 +82,7 @@ export class PlaywrightDetailPage {
       this.modalRekamMedis.locator("#modalKeterangan");
 
     this.lihatDetailTindakanButton = page
-      .getByRole("row", { name: "Pembedahan coba aja   " })
+      .getByRole("row")
       .getByRole("button")
       .first();
 
