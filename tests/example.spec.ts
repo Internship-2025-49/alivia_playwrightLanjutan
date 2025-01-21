@@ -57,6 +57,7 @@ test.describe("RekamMedis_Alivia", () => {
       "iip",
       "anak"
     );
+    await deletePage.deletePasien();
 
     await sidebarPage.cekRekamMedis();
     await dashboardPage.rekamMedis();
