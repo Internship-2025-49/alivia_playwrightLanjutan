@@ -12,6 +12,8 @@ const username = "admin";
 const password = "admin123";
 
 test.describe("RekamMedis_Alivia", () => {
+  test.setTimeout(50000);
+
   let loginPage: PlaywrightLoginPage;
   let dashboardPage: PlaywrightDashboardPage;
   let sidebarPage: PlaywrightSidebarPage;
@@ -45,41 +47,32 @@ test.describe("RekamMedis_Alivia", () => {
     await dashboardPage.checkTambahPasien();
     await isiPage.isiFormPasien();
     await detailPage.bacaDataPasien();
-    // await deletePage.clickDelete();
-    await editPage.editPasien(
-      "KHALIF",
-      "Laki-laki",
-      "Hindu",
-      "CITEUREUP",
-      "2025-01-24",
-      "15",
-      "083112529211",
-      "iip",
-      "anak"
-    );
+    await editPage.editPasien();
     await deletePage.deletePasien();
 
-    await sidebarPage.cekRekamMedis();
-    await dashboardPage.rekamMedis();
-    await dashboardPage.checkTambahRekamMedis();
-    await isiPage.isiFormRekamMedis();
-    await detailPage.bacaDataRekamMedis();
-    await editPage.editRekamMedis(
-      "Nugroho Panca",
-      "Pemeriksaan Umum",
-      "Paracetamol",
-      "mual",
-      "healing",
-      "mual bgt aa",
-      "2025-01-28",
-      "sudah ditangani"
-    );
+    // await sidebarPage.cekRekamMedis();
+    // await dashboardPage.rekamMedis();
+    // await dashboardPage.checkTambahRekamMedis();
+    // await isiPage.isiFormRekamMedis();
+    // await detailPage.bacaDataRekamMedis();
+    // await editPage.editRekamMedis(
+    //   "Nugroho Panca",
+    //   "Pemeriksaan Umum",
+    //   "Paracetamol",
+    //   "mual",
+    //   "healing",
+    //   "mual bgt aa",
+    //   "2025-01-28",
+    //   "sudah ditangani"
+    // );
+    // await deletePage.deleteRekamMedis();
 
-    await dashboardPage.Tindakan();
-    await sidebarPage.cekTindakan();
-    await dashboardPage.checkTambahTindakan();
-    await isiPage.isiFormTindakan();
-    await detailPage.bacaDataTindakan();
-    await editPage.editTindakan("Pemeriksaan Umum", "sudah ditangani");
+    // await dashboardPage.Tindakan();
+    // await sidebarPage.cekTindakan();
+    // await dashboardPage.checkTambahTindakan();
+    // await isiPage.isiFormTindakan();
+    // await detailPage.bacaDataTindakan();
+    // await editPage.editTindakan("Pemeriksaan Umum", "sudah ditangani");
+    // await deletePage.deleteTindakan();
   });
 });

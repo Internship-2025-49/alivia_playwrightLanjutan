@@ -1,4 +1,5 @@
 import { expect, type Locator, type Page } from "@playwright/test";
+import { faker } from "@faker-js/faker/locale/id_ID";
 
 export class PlaywrightEditFormPage {
   readonly page: Page;
@@ -71,26 +72,46 @@ export class PlaywrightEditFormPage {
     this.updateTindakanButton = page.locator('button[type="submit"]');
   }
 
-  async editPasien(
-    nm_pasien: string,
-    j_kel: string,
-    agama: string,
-    alamat: string,
-    tgl_lhr: string,
-    usia: string,
-    no_tlp: string,
-    nm_kk: string,
-    hub_kel: string
-  ) {
+  async editPasien() {
+    const nama_pasien = faker.person.fullName();
+    enum JenKel {
+      Laki = "Laki-laki",
+      Perempuan = "Perempuan",
+    }
+    const j_kel = faker.helpers.enumValue(JenKel);
+    enum kepercayaan {
+      Islam = "islam",
+      Hindu = "Hindu",
+      Kristen = "Kristen",
+      Budha = "Budha",
+    }
+    const agama = faker.helpers.enumValue(kepercayaan);
+    const alamat = faker.location.streetAddress();
+    const tgl_lahir = faker.date
+      .birthdate({ min: 18, max: 65, mode: "age" })
+      .toISOString()
+      .split("T")[0];
+    const usia = faker.string.numeric(2);
+    const no_telp = faker.phone.number({ style: "human" });
+    const nama_kk = faker.person.lastName();
+    enum Keluarga {
+      Ayah = "Ayah",
+      Ibu = "Ibu",
+      Adek = "Adek",
+      Kakak = "Kakak",
+      Saudara = "Saudara",
+    }
+    const hub_kel = faker.helpers.enumValue(Keluarga);
+
     await this.editPasienButton.click();
-    await this.namaPasienInput.fill(nm_pasien);
+    await this.namaPasienInput.fill(nama_pasien);
     await this.jenisKelaminSelect.selectOption(j_kel);
     await this.agamaSelect.selectOption(agama);
     await this.alamatTextarea.fill(alamat);
-    await this.tanggalLahirInput.fill(tgl_lhr);
+    await this.tanggalLahirInput.fill(tgl_lahir);
     await this.usiaInput.fill(usia);
-    await this.nomorTeleponInput.fill(no_tlp);
-    await this.namaKKInput.fill(nm_kk);
+    await this.nomorTeleponInput.fill(no_telp);
+    await this.namaKKInput.fill(nama_kk);
     await this.hubunganKeluargaInput.fill(hub_kel);
     await this.updatePasienButton.click();
   }

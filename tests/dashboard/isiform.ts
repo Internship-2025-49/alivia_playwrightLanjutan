@@ -66,36 +66,136 @@ export class PlaywrightIsianFormPage {
 
   async isiFormPasien() {
     const nama = faker.person.fullName();
+    enum JenKel {
+      Laki = "Laki-laki",
+      Perempuan = "Perempuan",
+    }
+    const j_kel = faker.helpers.enumValue(JenKel);
+
+    enum kepercayaan {
+      Islam = "islam",
+      Hindu = "Hindu",
+      Kristen = "Kristen",
+      Budha = "Budha",
+    }
+    const agama = faker.helpers.enumValue(kepercayaan);
+
     const alamat = faker.location.streetAddress();
+
+    const tgl_lahir = faker.date
+      .birthdate({ min: 18, max: 65, mode: "age" })
+      .toISOString()
+      .split("T")[0];
+
+    const usia = faker.string.numeric(2);
+    const no_telp = faker.phone.number({ style: "human" });
+    const nama_kk = faker.person.lastName();
+    enum Keluarga {
+      Ayah = "Ayah",
+      Ibu = "Ibu",
+      Adek = "Adek",
+      Kakak = "Kakak",
+      Saudara = "Saudara",
+    }
+    const hub_kel = faker.helpers.enumValue(Keluarga);
+
     await this.namaPasienInput.fill(nama);
-    await this.jenisKelaminSelect.selectOption("L");
-    await this.agamaSelect.selectOption("Islam");
+    await this.jenisKelaminSelect.selectOption(j_kel);
+    await this.agamaSelect.selectOption(agama);
     await this.alamatTextarea.fill(alamat);
-    await this.tanggalLahirInput.fill("1990-05-12");
-    await this.usiaInput.fill("30");
-    await this.nomorTeleponInput.fill("08123456789");
-    await this.namaKKInput.fill("Jane Doe");
-    await this.hubunganKeluargaInput.fill("Ibu");
+    await this.tanggalLahirInput.fill(tgl_lahir);
+    await this.usiaInput.fill(usia);
+    await this.nomorTeleponInput.fill(no_telp);
+    await this.namaKKInput.fill(nama_kk);
+    await this.hubunganKeluargaInput.fill(hub_kel);
     await this.submitPasienButton.click();
   }
 
   async isiFormRekamMedis() {
+    const diagnosa = faker.helpers.arrayElement([
+      "Flu biasa",
+      "Demam",
+      "Batuk pilek",
+      "Infeksi saluran pernapasan",
+      "Migrain",
+      "Radang tenggorokan",
+      "Alergi musiman",
+      "Infeksi kulit",
+      "Sakit perut",
+      "Hipertensi",
+    ]);
+
+    const obat = faker.helpers.arrayElement([
+      "Obat pereda demam",
+      "Paracetamol",
+      "Antibiotik",
+      "Vitamin C",
+      "Sirup batuk",
+      "Salep antiseptik",
+      "Antihistamin",
+      "Analgesik",
+      "Obat maag",
+      "Obat tetes mata",
+    ]);
+
+    const keluhan = faker.helpers.arrayElement([
+      "Sakit kepala, demam",
+      "Batuk, pilek",
+      "Nyeri perut, mual",
+      "Lemas, tidak nafsu makan",
+      "Sesak napas, batuk kering",
+      "Ruam kulit, gatal",
+      "Pusing, penglihatan kabur",
+      "Nyeri sendi, demam ringan",
+      "Sakit tenggorokan, suara serak",
+      "Mata merah, perih",
+    ]);
+
+    const tgl_periksa = faker.date
+      .birthdate({ min: 18, max: 65, mode: "age" })
+      .toISOString()
+      .split("T")[0];
+
+    const status = faker.helpers.arrayElement([
+      "Sudah ditangani",
+      "Dalam proses",
+      "Sedang dirawat",
+      "Menunggu pemeriksaan lebih lanjut",
+      "Selesai",
+      "Tunggu hasil lab",
+      "Belum diperiksa",
+      "Perlu rawat inap",
+      "Pulang paksa",
+      "Meninggal dunia",
+    ]);
+
     await this.pasienSelect.selectOption({ label: "John Doe" });
     await this.tindakanSelect.selectOption({ label: "Pemeriksaan Umum" });
     await this.obatInput.selectOption({ label: "Paracetamol" });
-    await this.diagnosaInput.fill("Flu biasa");
-    await this.resepTextarea.fill("Obat pereda demam");
-    await this.keluhanInput.fill("Sakit kepala, demam");
-    await this.tanggalPemeriksaanInput.fill("2025-01-20");
-    await this.keteranganTextarea.fill("Pemeriksaan rutin");
+    await this.diagnosaInput.fill(diagnosa);
+    await this.resepTextarea.fill(obat);
+    await this.keluhanInput.fill(keluhan);
+    await this.tanggalPemeriksaanInput.fill(tgl_periksa);
+    await this.keteranganTextarea.fill(status);
     await this.submitRekamMedisButton.click();
   }
 
   async isiFormTindakan() {
+    const ket_tindakan = faker.helpers.arrayElement([
+      "Pembedahan kecil untuk pengangkatan benjolan",
+      "Operasi caesar",
+      "Tindakan rontgen",
+      "Endoskopi saluran cerna",
+      "Pemeriksaan darah lengkap",
+      "CT Scan",
+      "Dialisis ginjal",
+      "Laparoskopi",
+      "Pembersihan luka",
+      "Fisioterapi",
+    ]);
+
     await this.namaTindakanInput.fill("Pemeriksaan Umum");
-    await this.keteranganTindakanTextarea.fill(
-      "Pembedahan kecil untuk pengangkatan benjolan"
-    );
+    await this.keteranganTindakanTextarea.fill(ket_tindakan);
     await this.submitTindakanButton.click();
   }
 }
