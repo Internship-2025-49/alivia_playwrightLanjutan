@@ -41,33 +41,76 @@ test.describe("RekamMedis_Alivia", () => {
   test("User Dashboard Page", async ({ page }) => {
     await dashboardPage.header();
     await dashboardPage.title();
+  });
 
+  test("Create Pasien Page", async ({ page }) => {
     await sidebarPage.cekPasien();
     await dashboardPage.pasien();
     await dashboardPage.checkTambahPasien();
     await isiPage.isiFormPasien();
-    await detailPage.bacaDataPasien();
-    await editPage.editPasien();
-    await deletePage.deletePasien();
+    await dashboardPage.pasien();
+  });
 
+  test("Detail Pasien Page", async ({ page }) => {
+    await sidebarPage.cekPasien();
+    await detailPage.bacaDataPasien();
+  });
+
+  test("Update Pasien Page", async ({ page }) => {
+    await sidebarPage.cekPasien();
+    await editPage.editPasien();
+  });
+  test("Delete Pasien Page", async ({ page }) => {
+    await sidebarPage.cekPasien();
+    await deletePage.deletePasien();
+  });
+
+  test("Create Rekam Medis Page", async ({ page }) => {
     await sidebarPage.cekRekamMedis();
     await dashboardPage.rekamMedis();
     await dashboardPage.checkTambahRekamMedis();
     await isiPage.isiFormRekamMedis();
+    await dashboardPage.rekamMedis();
+  });
+
+  test("Detail Rekam Medis Page", async ({ page }) => {
+    await sidebarPage.cekRekamMedis();
     await detailPage.bacaDataRekamMedis();
+  });
+
+  test("Update Rekam Medis Page", async ({ page }) => {
+    await sidebarPage.cekRekamMedis();
     await editPage.editRekamMedis(
       "John Doe",
       "Pemeriksaan Umum",
       "Paracetamol"
     );
-    await deletePage.deleteRekamMedis();
+  });
 
-    await dashboardPage.Tindakan();
+  test("Delete Rekam Medis Page", async ({ page }) => {
+    await sidebarPage.cekRekamMedis();
+    await deletePage.deleteRekamMedis();
+  });
+
+  test("Create Tindakan Page", async ({ page }) => {
     await sidebarPage.cekTindakan();
+    await dashboardPage.Tindakan();
     await dashboardPage.checkTambahTindakan();
     await isiPage.isiFormTindakan();
+    await dashboardPage.Tindakan();
+  });
+
+  test("Detail Tindakan Page", async ({ page }) => {
+    await sidebarPage.cekTindakan();
     await detailPage.bacaDataTindakan();
+  });
+
+  test("Update Tindakan Page", async ({ page }) => {
+    await sidebarPage.cekTindakan();
     await editPage.editTindakan("Pemeriksaan Umum");
+  });
+  test("Delete Tindakan Page", async ({ page }) => {
+    await sidebarPage.cekTindakan();
     await deletePage.deleteTindakan();
   });
 });
