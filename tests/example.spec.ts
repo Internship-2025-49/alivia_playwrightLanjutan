@@ -50,29 +50,24 @@ test.describe("RekamMedis_Alivia", () => {
     await editPage.editPasien();
     await deletePage.deletePasien();
 
-    // await sidebarPage.cekRekamMedis();
-    // await dashboardPage.rekamMedis();
-    // await dashboardPage.checkTambahRekamMedis();
-    // await isiPage.isiFormRekamMedis();
-    // await detailPage.bacaDataRekamMedis();
-    // await editPage.editRekamMedis(
-    //   "Nugroho Panca",
-    //   "Pemeriksaan Umum",
-    //   "Paracetamol",
-    //   "mual",
-    //   "healing",
-    //   "mual bgt aa",
-    //   "2025-01-28",
-    //   "sudah ditangani"
-    // );
-    // await deletePage.deleteRekamMedis();
+    await sidebarPage.cekRekamMedis();
+    await dashboardPage.rekamMedis();
+    await dashboardPage.checkTambahRekamMedis();
+    await isiPage.isiFormRekamMedis();
+    await detailPage.bacaDataRekamMedis();
+    await editPage.editRekamMedis(
+      "John Doe",
+      "Pemeriksaan Umum",
+      "Paracetamol"
+    );
+    await deletePage.deleteRekamMedis();
 
-    // await dashboardPage.Tindakan();
-    // await sidebarPage.cekTindakan();
-    // await dashboardPage.checkTambahTindakan();
-    // await isiPage.isiFormTindakan();
-    // await detailPage.bacaDataTindakan();
-    // await editPage.editTindakan("Pemeriksaan Umum", "sudah ditangani");
-    // await deletePage.deleteTindakan();
+    await dashboardPage.Tindakan();
+    await sidebarPage.cekTindakan();
+    await dashboardPage.checkTambahTindakan();
+    await isiPage.isiFormTindakan();
+    await detailPage.bacaDataTindakan();
+    await editPage.editTindakan("Pemeriksaan Umum");
+    await deletePage.deleteTindakan();
   });
 });

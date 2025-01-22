@@ -119,13 +119,64 @@ export class PlaywrightEditFormPage {
   async editRekamMedis(
     no_pasien: string,
     kd_tindakan: string,
-    kd_obat: string,
-    diagnosa: string,
-    resep: string,
-    keluhan: string,
-    tgl_pemeriksaan: string,
-    ket: string
+    kd_obat: string
   ) {
+    const diagnosa = faker.helpers
+      .arrayElement([
+        "Flu biasa",
+        "Demam",
+        "Batuk pilek",
+        "Infeksi saluran pernapasan",
+        "Migrain",
+        "Radang tenggorokan",
+        "Alergi musiman",
+        "Infeksi kulit",
+        "Sakit perut",
+        "Hipertensi",
+      ])
+      .toString();
+
+    const resep = faker.helpers.arrayElement([
+      "Tablet 200 mg diminum 2x sehari sehabis makan",
+      "Diminum sampai habis",
+      "Konsumsi 1 kapsul setiap 12 jam",
+      "Obat sirup 10 ml diminum setelah makan",
+      "Minum 1 tablet sehari pada pagi hari",
+      "Diminum 3 kali sehari setelah makan",
+      "Obat tetes 5 tetes 2x sehari",
+      "Gunakan salep 3x sehari pada area yang terinfeksi",
+      "Suntik 1 kali seminggu",
+      "Diminum 1 tablet setiap kali makan",
+    ]);
+
+    const keluhan = faker.helpers.arrayElement([
+      "Sakit kepala, demam",
+      "Batuk, pilek",
+      "Nyeri perut, mual",
+      "Lemas, tidak nafsu makan",
+      "Sesak napas, batuk kering",
+      "Ruam kulit, gatal",
+      "Pusing, penglihatan kabur",
+      "Nyeri sendi, demam ringan",
+      "Sakit tenggorokan, suara serak",
+      "Mata merah, perih",
+    ]);
+
+    const tgl_pemeriksaan = faker.date.recent().toISOString().split("T")[0];
+
+    const ket_tindakan = faker.helpers.arrayElement([
+      "Pembedahan kecil untuk pengangkatan benjolan",
+      "Operasi caesar",
+      "Tindakan rontgen",
+      "Endoskopi saluran cerna",
+      "Pemeriksaan darah lengkap",
+      "CT Scan",
+      "Dialisis ginjal",
+      "Laparoskopi",
+      "Pembersihan luka",
+      "Fisioterapi",
+    ]);
+
     await this.editRekamMedisButton.click();
     await this.pasienSelect.selectOption(no_pasien);
     await this.tindakanSelect.selectOption(kd_tindakan);
@@ -134,14 +185,27 @@ export class PlaywrightEditFormPage {
     await this.resepTextarea.fill(resep);
     await this.keluhanInput.fill(keluhan);
     await this.tanggalPemeriksaanInput.fill(tgl_pemeriksaan);
-    await this.keteranganTextarea.fill(ket);
+    await this.keteranganTextarea.fill(ket_tindakan);
     await this.updateRekamMedisButton.click();
   }
 
-  async editTindakan(nm_tindakan: string, ket: string) {
+  async editTindakan(nm_tindakan: string) {
+    const ket_tindakan = faker.helpers.arrayElement([
+      "Pembedahan kecil untuk pengangkatan benjolan",
+      "Operasi caesar",
+      "Tindakan rontgen",
+      "Endoskopi saluran cerna",
+      "Pemeriksaan darah lengkap",
+      "CT Scan",
+      "Dialisis ginjal",
+      "Laparoskopi",
+      "Pembersihan luka",
+      "Fisioterapi",
+    ]);
+
     await this.editTindakanButton.click();
     await this.namaTindakanInput.fill(nm_tindakan);
-    await this.keteranganTindakanTextarea.fill(ket);
+    await this.keteranganTindakanTextarea.fill(ket_tindakan);
     await this.updateTindakanButton.click();
   }
 }
