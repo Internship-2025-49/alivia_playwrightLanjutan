@@ -18,11 +18,14 @@ export class PlaywrightSidebarPage {
     this.goToRekamMedis = page.locator(
       'a.sidebar-link:has-text("Rekam Medis")'
     );
-    this.goToObat = page.locator("a", { hasText: "Obat" });
     this.goToTindakan = page.locator('a.sidebar-link:has-text("Tindakan")');
-    this.goToKunjungan = page.locator("a", { hasText: "Kunjungan" });
-    this.goToPoliKlinik = page.locator("a", { hasText: "Poli Klinik" });
-    this.goToLaboratorium = page.locator("a", { hasText: "Laboratorium" });
+    this.goToObat = page.locator('a.sidebar-link:has-text("Obat")');
+    this.goToKunjungan = page.locator('a.sidebar-link:has-text("Kunjungan")');
+    this.goToDokter = page.locator('a.sidebar-link:has-text("Dokter")');
+    this.goToPoliKlinik = page.locator('a.sidebar-link:has-text("Poliklinik")');
+    this.goToLaboratorium = page.locator(
+      'a.sidebar-link:has-text("Laboratorium")'
+    );
   }
 
   async cekPasien() {
@@ -36,24 +39,39 @@ export class PlaywrightSidebarPage {
     await expect(this.page).toHaveURL("http://127.0.0.1:8000/rekam-medis");
   }
 
-  async cekObat() {
-    await expect(this.goToObat).toBeVisible();
-    await this.goToObat.click();
-  }
-
   async cekTindakan() {
     await expect(this.goToTindakan).toBeVisible();
     await this.goToTindakan.click();
     await expect(this.page).toHaveURL("http://127.0.0.1:8000/tindakans");
   }
 
+  async cekObat() {
+    await expect(this.goToObat).toBeVisible();
+    await this.goToObat.click();
+    await expect(this.page).toHaveURL("http://127.0.0.1:8000/obats");
+  }
+
+  async cekKunjungan() {
+    await expect(this.goToKunjungan).toBeVisible();
+    await this.goToKunjungan.click();
+    await expect(this.page).toHaveURL("http://127.0.0.1:8000/kunjungans");
+  }
+
+  async cekDokter() {
+    await expect(this.goToDokter).toBeVisible();
+    await this.goToDokter.click();
+    await expect(this.page).toHaveURL("http://127.0.0.1:8000/dokters");
+  }
+
   async cekPoliKlinik() {
     await expect(this.goToPoliKlinik).toBeVisible();
     await this.goToPoliKlinik.click();
+    await expect(this.page).toHaveURL("http://127.0.0.1:8000/polikliniks");
   }
 
   async cekLaboratorium() {
     await expect(this.goToLaboratorium).toBeVisible();
     await this.goToLaboratorium.click();
+    await expect(this.page).toHaveURL("http://127.0.0.1:8000/laboratoriums");
   }
 }

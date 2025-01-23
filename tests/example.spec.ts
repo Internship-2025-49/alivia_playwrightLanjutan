@@ -12,7 +12,7 @@ const username = "admin";
 const password = "admin123";
 
 test.describe("RekamMedis_Alivia", () => {
-  test.setTimeout(50000);
+  test.setTimeout(30000);
 
   let loginPage: PlaywrightLoginPage;
   let dashboardPage: PlaywrightDashboardPage;
@@ -94,10 +94,10 @@ test.describe("RekamMedis_Alivia", () => {
 
   test("Create Tindakan Page", async ({ page }) => {
     await sidebarPage.cekTindakan();
-    await dashboardPage.Tindakan();
+    await dashboardPage.tindakan();
     await dashboardPage.checkTambahTindakan();
     await isiPage.isiFormTindakan();
-    await dashboardPage.Tindakan();
+    await dashboardPage.tindakan();
   });
 
   test("Detail Tindakan Page", async ({ page }) => {
@@ -112,5 +112,41 @@ test.describe("RekamMedis_Alivia", () => {
   test("Delete Tindakan Page", async ({ page }) => {
     await sidebarPage.cekTindakan();
     await deletePage.deleteTindakan();
+  });
+
+  test("Create Obat Page", async ({ page }) => {
+    await sidebarPage.cekObat();
+    await dashboardPage.obat();
+    await dashboardPage.checkTambahObat();
+    await isiPage.isiFormObat();
+    await dashboardPage.obat();
+  });
+
+  test("Create Kunjungan Page", async ({ page }) => {
+    await sidebarPage.cekKunjungan();
+    await dashboardPage.kunjungan();
+    await dashboardPage.checkTambahKunjungan();
+    await isiPage.isiFormKunjungan();
+  });
+
+  test("Create Dokter Page", async ({ page }) => {
+    await sidebarPage.cekDokter();
+    await dashboardPage.dokter();
+    await dashboardPage.checkTambahDokter();
+    await isiPage.isiFormDokter();
+  });
+
+  test("Create Poliklinik Page", async ({ page }) => {
+    await sidebarPage.cekPoliKlinik();
+    await dashboardPage.poliklinik();
+    await dashboardPage.checkTambahPoliklinik();
+    await isiPage.isiFormPoliklinik();
+  });
+
+  test("Create Laboratorium Page", async ({ page }) => {
+    await sidebarPage.cekLaboratorium();
+    await dashboardPage.laboratorium();
+    await dashboardPage.checkTambahLaboratorium();
+    await isiPage.isiFormLaboratorium();
   });
 });

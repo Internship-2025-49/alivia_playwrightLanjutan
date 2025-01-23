@@ -81,6 +81,7 @@ export class PlaywrightDetailPage {
     this.keteranganRekamMedisDetail =
       this.modalRekamMedis.locator("#modalKeterangan");
 
+    // Lokator untuk modal detail tindakan
     this.lihatDetailTindakanButton = page
       .getByRole("row")
       .getByRole("button")

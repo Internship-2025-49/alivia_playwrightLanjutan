@@ -204,7 +204,7 @@ export class PlaywrightEditFormPage {
     ]);
 
     await this.editTindakanButton.click();
-    await this.namaTindakanInput.fill(nm_tindakan);
+    await this.namaTindakanInput.selectOption(nm_tindakan);
     await this.keteranganTindakanTextarea.fill(ket_tindakan);
     await this.updateTindakanButton.click();
   }
