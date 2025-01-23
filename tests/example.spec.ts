@@ -127,6 +127,11 @@ test.describe("RekamMedis_Alivia", () => {
     await detailPage.bacaDataObat();
   });
 
+  test("Delete Obat Page", async ({ page }) => {
+    await sidebarPage.cekObat();
+    await deletePage.deleteObat();
+  });
+
   test("Create Kunjungan Page", async ({ page }) => {
     await sidebarPage.cekKunjungan();
     await dashboardPage.kunjungan();
@@ -137,6 +142,11 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Kunjungan Page", async ({ page }) => {
     await sidebarPage.cekKunjungan();
     await detailPage.bacaDataKunjungan();
+  });
+
+  test("Delete Kunjungan Page", async ({ page }) => {
+    await sidebarPage.cekKunjungan();
+    await deletePage.deleteKunjungan();
   });
 
   test("Create Dokter Page", async ({ page }) => {
@@ -151,6 +161,11 @@ test.describe("RekamMedis_Alivia", () => {
     await detailPage.bacaDataDokter();
   });
 
+  test("Delete Dokter Page", async ({ page }) => {
+    await sidebarPage.cekDokter();
+    await deletePage.deleteDokter();
+  });
+
   test("Create Poliklinik Page", async ({ page }) => {
     await sidebarPage.cekPoliKlinik();
     await dashboardPage.poliklinik();
@@ -161,6 +176,11 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Poliklinik Page", async ({ page }) => {
     await sidebarPage.cekPoliKlinik();
     await detailPage.bacaDataPoliklinik();
+  });
+
+  test("Delete Poliklinik Page", async ({ page }) => {
+    await sidebarPage.cekPoliKlinik();
+    await deletePage.deletePoliklinik();
   });
 
   test("Create Laboratorium Page", async ({ page }) => {
@@ -174,5 +194,10 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Laboratorium Page", async ({ page }) => {
     await sidebarPage.cekLaboratorium();
     await detailPage.bacaDataLaboratorium();
+  });
+
+  test("Delete Laboratorium Page", async ({ page }) => {
+    await sidebarPage.cekLaboratorium();
+    await deletePage.deleteLaboratorium();
   });
 });
