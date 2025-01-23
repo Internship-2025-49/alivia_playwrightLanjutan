@@ -107,8 +107,9 @@ test.describe("RekamMedis_Alivia", () => {
 
   test("Update Tindakan Page", async ({ page }) => {
     await sidebarPage.cekTindakan();
-    await editPage.editTindakan("Pemeriksaan Umum");
+    await editPage.editTindakan();
   });
+
   test("Delete Tindakan Page", async ({ page }) => {
     await sidebarPage.cekTindakan();
     await deletePage.deleteTindakan();
@@ -125,6 +126,11 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Obat Page", async ({ page }) => {
     await sidebarPage.cekObat();
     await detailPage.bacaDataObat();
+  });
+
+  test("Update Obat Page", async ({ page }) => {
+    await sidebarPage.cekObat();
+    await editPage.editObat();
   });
 
   test("Delete Obat Page", async ({ page }) => {
@@ -144,6 +150,11 @@ test.describe("RekamMedis_Alivia", () => {
     await detailPage.bacaDataKunjungan();
   });
 
+  test("Update Kunjungan Page", async ({ page }) => {
+    await sidebarPage.cekKunjungan();
+    await editPage.editKunjungan();
+  });
+
   test("Delete Kunjungan Page", async ({ page }) => {
     await sidebarPage.cekKunjungan();
     await deletePage.deleteKunjungan();
@@ -159,6 +170,11 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Dokter Page", async ({ page }) => {
     await sidebarPage.cekDokter();
     await detailPage.bacaDataDokter();
+  });
+
+  test("Update Dokter Page", async ({ page }) => {
+    await sidebarPage.cekDokter();
+    await editPage.editDokter();
   });
 
   test("Delete Dokter Page", async ({ page }) => {
@@ -178,6 +194,11 @@ test.describe("RekamMedis_Alivia", () => {
     await detailPage.bacaDataPoliklinik();
   });
 
+  test("Update Poliklinik Page", async ({ page }) => {
+    await sidebarPage.cekPoliKlinik();
+    await editPage.editPoliklinik();
+  });
+
   test("Delete Poliklinik Page", async ({ page }) => {
     await sidebarPage.cekPoliKlinik();
     await deletePage.deletePoliklinik();
@@ -194,6 +215,11 @@ test.describe("RekamMedis_Alivia", () => {
   test("Detail Laboratorium Page", async ({ page }) => {
     await sidebarPage.cekLaboratorium();
     await detailPage.bacaDataLaboratorium();
+  });
+
+  test("Update Laboratorium Page", async ({ page }) => {
+    await sidebarPage.cekLaboratorium();
+    await editPage.editLaboratorium();
   });
 
   test("Delete Laboratorium Page", async ({ page }) => {
