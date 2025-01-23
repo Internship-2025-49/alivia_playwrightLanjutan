@@ -311,6 +311,7 @@ export class PlaywrightIsianFormPage {
       "poli gigi",
       "poli anak",
       "poli mata",
+      "poli gizi",
     ]);
 
     const tgl_kunjungan = faker.date
@@ -339,6 +340,7 @@ export class PlaywrightIsianFormPage {
       "poli gigi",
       "poli mata",
       "poli anak",
+      "poli gizi",
     ]);
 
     const tgl_kunjungan = faker.date

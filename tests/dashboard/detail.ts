@@ -94,6 +94,9 @@ export class PlaywrightDetailPage {
     this.usiaDetail = this.modalPasien.locator("#modalUsia");
     this.nomorTeleponDetail = this.modalPasien.locator("#modalNomorTelepon");
     this.namaKKDetail = this.modalPasien.locator("#modalNomorKK");
+    this.hubunganKeluargaDetail = this.modalPasien.locator(
+      "#modalHubunganKeluarga"
+    );
 
     // Lokator untuk tombol lihat detail rekam medis
 

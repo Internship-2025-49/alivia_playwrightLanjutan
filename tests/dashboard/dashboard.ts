@@ -41,7 +41,7 @@ export class PlaywrightDashboardPage {
     this.checkTitleDashboard = page
       .locator("h1")
       .filter({ hasText: "Selamat Datang, Admin" });
-    this.checkPasien = page.locator("h3", { hasText: "Pasien" });
+    this.checkPasien = page.locator("h3", { hasText: "Data Pasien" });
     this.checkRekamMedis = page.locator("h4", {
       hasText: "Daftar Rekam Medis",
     });
@@ -55,6 +55,9 @@ export class PlaywrightDashboardPage {
     });
 
     this.TambahPasien = page.locator("a", { hasText: "Tambah Pasien" });
+    this.TambahPasienButton = page.locator("a.btn.btn-success", {
+      hasText: "Tambah Pasien",
+    });
     this.TambahRekamMedisButton = page.locator("a.btn.btn-success", {
       hasText: "Tambah Rekam Medis",
     });
