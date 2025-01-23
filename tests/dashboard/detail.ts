@@ -33,6 +33,42 @@ export class PlaywrightDetailPage {
   readonly namaTindakanDetail: Locator;
   readonly keteranganTindakanDetail: Locator;
 
+  // Lokator untuk tombol lihat detail obat
+  readonly lihatDetailObatButton: Locator;
+  readonly modalObat: Locator;
+  readonly modalNamaObat: Locator;
+  readonly modalJumlah: Locator;
+  readonly modalUkuran: Locator;
+  readonly modalHarga: Locator;
+
+  // Lokator untuk tombol lihat detail Kunjungan
+  readonly lihatDetailKunjunganButton: Locator;
+  readonly modalKunjungan: Locator;
+  readonly namaPasienKunjunganDetail: Locator;
+  readonly tanggalKunjunganDetail: Locator;
+  readonly keteranganKunjunganDetail: Locator;
+
+  // Lokator untuk tombol lihat Dokter
+  readonly lihatDetailDokterButton: Locator;
+  readonly modalDokter: Locator;
+  readonly modalNamaDokter: Locator;
+  readonly modalPoliklinik: Locator;
+  readonly modalSIP: Locator;
+  readonly keteranganDokterDetail: Locator;
+
+  //Lokator Untuk tombol lihat Poliklinik
+  readonly lihatDetailPoliklinikButton: Locator;
+  readonly modalPoliklinikDetail: Locator;
+  readonly modalNamaPoliklinik: Locator;
+  readonly modalLantai: Locator;
+
+  //Lokator untuk tombol lihat Laboratorium
+  readonly lihatDetailLaboratoriumButton: Locator;
+  readonly modalLaboratorium: Locator;
+  readonly modalNoPasien: Locator;
+  readonly modalHasilLab: Locator;
+  readonly modalKeterangan: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -58,9 +94,6 @@ export class PlaywrightDetailPage {
     this.usiaDetail = this.modalPasien.locator("#modalUsia");
     this.nomorTeleponDetail = this.modalPasien.locator("#modalNomorTelepon");
     this.namaKKDetail = this.modalPasien.locator("#modalNomorKK");
-    this.hubunganKeluargaDetail = this.modalPasien.locator(
-      "#modalHubunganKeluarga"
-    );
 
     // Lokator untuk tombol lihat detail rekam medis
 
@@ -91,6 +124,64 @@ export class PlaywrightDetailPage {
     this.namaTindakanDetail = this.modalTindakan.locator("#modalNamaTindakan");
     this.keteranganTindakanDetail =
       this.modalTindakan.locator("#modalDeskripsi");
+
+    // Lokator untuk modal detail Obat
+    this.lihatDetailObatButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
+
+    this.modalObat = page.locator("#detailModal");
+    this.modalNamaObat = this.modalObat.locator("#modalNamaObat");
+    this.modalJumlah = this.modalObat.locator("#modalJumlah");
+    this.modalUkuran = this.modalObat.locator("#modalUkuran");
+    this.modalHarga = this.modalObat.locator("#modalHarga");
+
+    // Lokator untuk modal detail Kunjungan
+    this.lihatDetailKunjunganButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
+
+    this.modalKunjungan = page.locator("#detailModal");
+    this.namaPasienDetail = this.modalKunjungan.locator("#modalNamaPasien");
+    this.tanggalKunjunganDetail = this.modalKunjungan.locator(
+      "#modalTanggalKunjungan"
+    );
+
+    //Lokator untuk modal detail Dokter
+    this.lihatDetailDokterButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
+
+    this.modalDokter = page.locator("#detailModal");
+    this.modalNamaDokter = this.modalDokter.locator("#modalNamaDokter");
+    this.modalPoliklinik = this.modalDokter.locator("#modalPoliklinik");
+    this.modalSIP = this.modalDokter.locator("#modalSIP");
+
+    //Lokator untuk modal detail Poliklinik
+    this.lihatDetailPoliklinikButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
+
+    this.modalPoliklinikDetail = page.locator("#detailModal");
+    this.modalNamaPoliklinik = this.modalPoliklinikDetail.locator(
+      "#modalNamaPoliklinik"
+    );
+    this.modalLantai = this.modalPoliklinikDetail.locator("#modalLantai");
+
+    // Lokator tombol lihat detail laboratorium
+    this.lihatDetailLaboratoriumButton = page
+      .getByRole("row")
+      .getByRole("button")
+      .first();
+
+    this.modalLaboratorium = page.locator("#detailModal");
+    this.modalNoPasien = this.modalLaboratorium.locator("#modalNoPasien");
+    this.modalHasilLab = this.modalLaboratorium.locator("#modalHasilLab");
+    this.modalKeterangan = this.modalLaboratorium.locator("#modalKeterangan");
   }
 
   async bacaDataPasien() {
@@ -157,5 +248,83 @@ export class PlaywrightDetailPage {
 
     await this.closeButton.click();
     await this.modalTindakan.waitFor({ state: "hidden" });
+  }
+
+  async bacaDataObat() {
+    await this.lihatDetailObatButton.click();
+    await this.modalObat.waitFor({ state: "visible" });
+
+    const namaObat = await this.modalNamaObat.textContent();
+    const jumlahObat = await this.modalJumlah.textContent();
+    const ukuranObat = await this.modalUkuran.textContent();
+    const hargaObat = await this.modalHarga.textContent();
+
+    console.log("Nama Obat: ", namaObat);
+    console.log("Jumlah Obat: ", jumlahObat);
+    console.log("Ukuran Obat: ", ukuranObat);
+    console.log("Harga Obat: ", hargaObat);
+
+    await this.closeButton.click();
+    await this.modalObat.waitFor({ state: "hidden" });
+  }
+
+  async bacaDataKunjungan() {
+    await this.lihatDetailKunjunganButton.click();
+    await this.modalKunjungan.waitFor({ state: "visible" });
+
+    const namaPasien = await this.namaPasienDetail.textContent();
+    const tanggalKunjungan = await this.tanggalKunjunganDetail.textContent();
+
+    console.log("Nama Pasien: ", namaPasien);
+    console.log("Tanggal Kunjungan: ", tanggalKunjungan);
+
+    await this.closeButton.click();
+    await this.modalKunjungan.waitFor({ state: "hidden" });
+  }
+
+  async bacaDataDokter() {
+    await this.lihatDetailDokterButton.click();
+    await this.modalDokter.waitFor({ state: "visible" });
+
+    const namaDokter = await this.modalNamaDokter.textContent();
+    const poliklinik = await this.modalPoliklinik.textContent();
+    const SIP = await this.modalSIP.textContent();
+
+    console.log("Nama Dokter: ", namaDokter);
+    console.log("Poliklinik: ", poliklinik);
+    console.log("SIP: ", SIP);
+
+    await this.closeButton.click();
+    await this.modalDokter.waitFor({ state: "hidden" });
+  }
+
+  async bacaDataPoliklinik() {
+    await this.lihatDetailPoliklinikButton.click();
+    await this.modalPoliklinikDetail.waitFor({ state: "visible" });
+
+    const namaPoliklinik = await this.modalNamaPoliklinik.textContent();
+    const lantai = await this.modalLantai.textContent();
+
+    console.log("Nama Poliklinik: ", namaPoliklinik);
+    console.log("Lantai: ", lantai);
+
+    await this.closeButton.click();
+    await this.modalPoliklinikDetail.waitFor({ state: "hidden" });
+  }
+
+  async bacaDataLaboratorium() {
+    await this.lihatDetailLaboratoriumButton.click();
+    await this.modalLaboratorium.waitFor({ state: "visible" });
+
+    const noPasien = await this.modalNoPasien.textContent();
+    const hasilLab = await this.modalHasilLab.textContent();
+    const keterangan = await this.modalKeterangan.textContent();
+
+    console.log("Nomor Pasien: ", noPasien);
+    console.log("Hasil Lab: ", hasilLab);
+    console.log("Keterangan: ", keterangan);
+
+    await this.closeButton.click();
+    await this.modalLaboratorium.waitFor({ state: "hidden" });
   }
 }

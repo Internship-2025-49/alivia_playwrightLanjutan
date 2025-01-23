@@ -376,13 +376,7 @@ export class PlaywrightIsianFormPage {
   }
 
   async isiFormLaboratorium() {
-    const rk_medis = faker.helpers.arrayElement([
-      "Pemeriksaan rutin",
-      "Keluhan nyeri dada",
-      "Riwayat asma sejak kecil",
-      "Operasi usus buntu",
-      "Diagnosa hipertensi",
-    ]);
+    const rk_medis = faker.helpers.arrayElement(["75", "76", "91", "97"]);
 
     const hasil_lab = faker.helpers.arrayElement([
       "Hemoglobin: Normal",
@@ -400,7 +394,7 @@ export class PlaywrightIsianFormPage {
       "Rujukan ke dokter spesialis",
     ]);
 
-    await this.rekamMedisInput.fill(rk_medis);
+    await this.rekamMedisInput.selectOption(rk_medis);
     await this.hasilLabInput.fill(hasil_lab);
     await this.keteranganInput.fill(ket);
     await this.submitLaboratoriumButton.click();
