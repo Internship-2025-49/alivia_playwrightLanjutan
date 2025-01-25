@@ -1,4 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
+import { PlaywrightSidebarPage } from "./sidebar";
+import { PlaywrightDashboardPage } from "./dashboard";
 
 export class PlaywrightDeletePage {
   readonly page: Page;
@@ -19,10 +21,21 @@ export class PlaywrightDeletePage {
   readonly checkDokter: Locator;
   readonly checkPoliklinik: Locator;
   readonly checkLaboratorium: Locator;
+  readonly toDashboard: Locator;
 
   constructor(page: Page) {
     this.page = page;
+
     this.deletePasienButton = page.locator("form").getByRole("button").last();
+    // page
+    //   .getByRole("row")
+    //   .locator("form")
+    //   .getByRole("button")
+    //   .last();
+
+    // page.locator("form").getByRole("button").last();
+
+    // page.getByRole('row').locator('form').getByRole('button').last();
     this.checkPasien = page.getByText("Pasien berhasil dihapus.");
 
     this.deleteRekamMedisButton = page

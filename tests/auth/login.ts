@@ -17,7 +17,7 @@ export class PlaywrightLoginPage {
   }
 
   async toLoginPage() {
-    await expect(this.page).toHaveURL("http://127.0.0.1:8000");
+    await expect(this.page).toHaveURL("/login");
     await expect(this.cekLoginPage).toBeVisible();
   }
 
