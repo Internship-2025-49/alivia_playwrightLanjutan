@@ -275,5 +275,7 @@ test.describe("RekamMedis_Alivia", () => {
   test("Delete Laboratorium Page", async ({ sidebarPage, deletePage }) => {
     await sidebarPage.cekLaboratorium();
     await deletePage.deleteLaboratorium();
+
+    console.log("test initial commit");
   });
 });
