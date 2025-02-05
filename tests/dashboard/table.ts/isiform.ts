@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { faker } from "@faker-js/faker/locale/id_ID";
 
-export class PlaywrightEditFormPage {
+export class PlaywrightIsianFormPage {
   readonly page: Page;
 
   // Lokator untuk form pasien
@@ -14,42 +14,37 @@ export class PlaywrightEditFormPage {
   readonly nomorTeleponInput: Locator;
   readonly namaKKInput: Locator;
   readonly hubunganKeluargaInput: Locator;
-  readonly editPasienButton: Locator;
-  readonly updatePasienButton: Locator;
+  readonly submitPasienButton: Locator;
 
   // Lokator untuk form rekam medis
   readonly pasienSelect: Locator;
   readonly tindakanSelect: Locator;
-  readonly obatSelect: Locator;
+  readonly obatInput: Locator;
   readonly diagnosaInput: Locator;
   readonly resepTextarea: Locator;
   readonly keluhanInput: Locator;
   readonly tanggalPemeriksaanInput: Locator;
   readonly keteranganTextarea: Locator;
-  readonly editRekamMedisButton: Locator;
-  readonly updateRekamMedisButton: Locator;
+  readonly submitRekamMedisButton: Locator;
 
   // Lokator untuk form tindakan
   readonly namaTindakanInput: Locator;
   readonly keteranganTindakanTextarea: Locator;
-  readonly editTindakanButton: Locator;
-  readonly updateTindakanButton: Locator;
+  readonly submitTindakanButton: Locator;
 
   // Lokator untuk form obat
   readonly nmObatInput: Locator;
   readonly jmlObatInput: Locator;
   readonly ukuranInput: Locator;
   readonly hargaInput: Locator;
-  readonly editObatButton: Locator;
-  readonly updateobatButton: Locator;
+  readonly submitObatButton: Locator;
 
   // Lokator untuk form kunjungan
   readonly noPasienSelect: Locator;
   readonly kdPoliSelect: Locator;
   readonly tglKunjunganInput: Locator;
   readonly jamKunjunganInput: Locator;
-  readonly editKunjunganButton: Locator;
-  readonly updatekunjunganButton: Locator;
+  readonly submitKunjunganButton: Locator;
 
   // Lokator untuk form dokter
   readonly namaDokterInput: Locator;
@@ -59,120 +54,109 @@ export class PlaywrightEditFormPage {
   readonly dokterTempatLahirInput: Locator;
   readonly dokterNoTelpInput: Locator;
   readonly dokterAlamatInput: Locator;
-  readonly editDokterButton: Locator;
-  readonly updatedokterButton: Locator;
+  readonly submitDokterButton: Locator;
 
   // Lokator untuk form poliklinik
   readonly namaPoliInput: Locator;
   readonly poliLantaiInput: Locator;
-  readonly editPoliklinikButton: Locator;
-  readonly updatepoliklinikButton: Locator;
+  readonly submitPoliButton: Locator;
 
-  // Lokator untuk form laboratorium
+  // Lokator Laboratorium
   readonly rekamMedisInput: Locator;
   readonly hasilLabInput: Locator;
   readonly keteranganInput: Locator;
-  readonly editLaboratoriumButton: Locator;
-  readonly updatelaboratoriumButton: Locator;
+  readonly submitLaboratoriumButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
 
     // Lokator form pasien
-    this.editPasienButton = page.getByRole("row").getByRole("link").first();
     this.namaPasienInput = page.locator("#nm_pasien");
-    this.jenisKelaminSelect = page.locator("select#j_kel");
-    this.agamaSelect = page.locator("select#agama");
+    this.jenisKelaminSelect = page.locator("#j_kel");
+    this.agamaSelect = page.locator("#agama");
     this.alamatTextarea = page.locator("#alamat");
     this.tanggalLahirInput = page.locator("#tgl_lhr");
     this.usiaInput = page.locator("#usia");
     this.nomorTeleponInput = page.locator("#no_tlp");
     this.namaKKInput = page.locator("#nm_kk");
     this.hubunganKeluargaInput = page.locator("#hub_kel");
-    this.updatePasienButton = page.locator("button:has-text('Update')");
+    this.submitPasienButton = page.locator('button[type="submit"]');
 
     // Lokator form rekam medis
-
-    this.editRekamMedisButton = page.getByRole("row").getByRole("link").first();
-    this.pasienSelect = page.locator("select#no_pasien");
-    this.tindakanSelect = page.locator("select#kd_tindakan");
-    this.obatSelect = page.locator("select#kd_obat");
+    this.pasienSelect = page.locator("#no_pasien");
+    this.tindakanSelect = page.locator("#kd_tindakan");
+    this.obatInput = page.locator("#kd_obat");
     this.diagnosaInput = page.locator("#diagnosa");
     this.resepTextarea = page.locator("#resep");
     this.keluhanInput = page.locator("#keluhan");
     this.tanggalPemeriksaanInput = page.locator("#tgl_pemeriksaan");
     this.keteranganTextarea = page.locator("#ket");
-    this.updateRekamMedisButton = page.locator('button[type="submit"]');
+    this.submitRekamMedisButton = page.locator('button[type="submit"]');
 
     // Lokator form tindakan
-    this.editTindakanButton = page.getByRole("row").getByRole("link").first();
     this.namaTindakanInput = page.locator("#nm_tindakan");
     this.keteranganTindakanTextarea = page.locator("#ket");
-    this.updateTindakanButton = page.locator('button[type="submit"]');
+    this.submitTindakanButton = page.locator('button[type="submit"]');
 
     // Lokator form obat
-    this.editObatButton = page.getByRole("row").getByRole("link").first();
     this.nmObatInput = page.locator("#nm_obat");
     this.jmlObatInput = page.locator("#jml_obat");
     this.ukuranInput = page.locator("#ukuran");
     this.hargaInput = page.locator("#harga");
-    this.updateobatButton = page.locator('button[type="submit"]');
+    this.submitObatButton = page.locator('button[type="submit"]');
 
     // Lokator form kunjungan
-    this.editKunjunganButton = page.getByRole("row").getByRole("link").first();
-    this.noPasienSelect = page.locator("select#no_pasien");
-    this.kdPoliSelect = page.locator("select#kd_poli");
+    this.noPasienSelect = page.locator("#no_pasien");
+    this.kdPoliSelect = page.locator("#kd_poli");
     this.tglKunjunganInput = page.locator("#tgl_kunjungan");
     this.jamKunjunganInput = page.locator("#jam_kunjungan");
-    this.updatekunjunganButton = page.locator('button[type="submit"]');
+    this.submitKunjunganButton = page.locator('button[type="submit"]');
 
     // Lokator form dokter
-    this.editDokterButton = page.getByRole("row").getByRole("link").first();
     this.namaDokterInput = page.locator("#nm_dokter");
-    this.pilihPoliSelect = page.locator("select#kd_poli");
+    this.pilihPoliSelect = page.locator("#kd_poli");
     this.sipInput = page.locator("#SIP");
     this.dokterKunjunganIput = page.locator("#tgl_kunjungan");
     this.dokterTempatLahirInput = page.locator("#tmpat_lhr");
     this.dokterNoTelpInput = page.locator("#no_tlp");
     this.dokterAlamatInput = page.locator("#alamat");
-    this.updatedokterButton = page.locator('button[type="submit"]');
+    this.submitDokterButton = page.locator('button[type="submit"]');
 
-    // Lokator form poliklinik
-    this.editPoliklinikButton = page.getByRole("row").getByRole("link").first();
+    // Lokator untuk form poliklinik
     this.namaPoliInput = page.locator("#nm_poli");
     this.poliLantaiInput = page.locator("#lantai");
-    this.updatepoliklinikButton = page.locator('button[type="submit"]');
+    this.submitPoliButton = page.locator('button[type="submit"]');
 
-    // Lokator form laboratorium
-    this.editLaboratoriumButton = page
-      .getByRole("row")
-      .getByRole("link")
-      .first();
+    // Lokator Laboratorium
     this.rekamMedisInput = page.locator("#no_rm");
     this.hasilLabInput = page.locator("#hasil_lab");
     this.keteranganInput = page.locator("#ket");
-    this.updatelaboratoriumButton = page.locator('button[type="submit"]');
+    this.submitLaboratoriumButton = page.locator('button[type="submit"]');
   }
 
-  async editPasien() {
-    const nama_pasien = faker.person.fullName();
+  async isiFormPasien() {
+    const nama = faker.person.fullName();
     enum JenKel {
       Laki = "Laki-laki",
       Perempuan = "Perempuan",
     }
     const j_kel = faker.helpers.enumValue(JenKel);
+
     enum kepercayaan {
-      Islam = "islam",
+      Islam = "Islam",
       Hindu = "Hindu",
       Kristen = "Kristen",
       Budha = "Budha",
     }
     const agama = faker.helpers.enumValue(kepercayaan);
+
     const alamat = faker.location.streetAddress();
+
     const tgl_lahir = faker.date
       .birthdate({ min: 18, max: 65, mode: "age" })
       .toISOString()
       .split("T")[0];
+
     const usia = faker.string.numeric(2);
     const no_telp = faker.phone.number({ style: "human" });
     const nama_kk = faker.person.lastName();
@@ -185,8 +169,7 @@ export class PlaywrightEditFormPage {
     }
     const hub_kel = faker.helpers.enumValue(Keluarga);
 
-    await this.editPasienButton.click();
-    await this.namaPasienInput.fill(nama_pasien);
+    await this.namaPasienInput.fill(nama);
     await this.jenisKelaminSelect.selectOption(j_kel);
     await this.agamaSelect.selectOption(agama);
     await this.alamatTextarea.fill(alamat);
@@ -195,40 +178,34 @@ export class PlaywrightEditFormPage {
     await this.nomorTeleponInput.fill(no_telp);
     await this.namaKKInput.fill(nama_kk);
     await this.hubunganKeluargaInput.fill(hub_kel);
-    await this.updatePasienButton.click();
+    await this.submitPasienButton.click();
   }
 
-  async editRekamMedis(
-    no_pasien: string,
-    kd_tindakan: string,
-    kd_obat: string
-  ) {
-    const diagnosa = faker.helpers
-      .arrayElement([
-        "Flu biasa",
-        "Demam",
-        "Batuk pilek",
-        "Infeksi saluran pernapasan",
-        "Migrain",
-        "Radang tenggorokan",
-        "Alergi musiman",
-        "Infeksi kulit",
-        "Sakit perut",
-        "Hipertensi",
-      ])
-      .toString();
+  async isiFormRekamMedis() {
+    const diagnosa = faker.helpers.arrayElement([
+      "Flu biasa",
+      "Demam",
+      "Batuk pilek",
+      "Infeksi saluran pernapasan",
+      "Migrain",
+      "Radang tenggorokan",
+      "Alergi musiman",
+      "Infeksi kulit",
+      "Sakit perut",
+      "Hipertensi",
+    ]);
 
-    const resep = faker.helpers.arrayElement([
-      "Tablet 200 mg diminum 2x sehari sehabis makan",
-      "Diminum sampai habis",
-      "Konsumsi 1 kapsul setiap 12 jam",
-      "Obat sirup 10 ml diminum setelah makan",
-      "Minum 1 tablet sehari pada pagi hari",
-      "Diminum 3 kali sehari setelah makan",
-      "Obat tetes 5 tetes 2x sehari",
-      "Gunakan salep 3x sehari pada area yang terinfeksi",
-      "Suntik 1 kali seminggu",
-      "Diminum 1 tablet setiap kali makan",
+    const obat = faker.helpers.arrayElement([
+      "Obat pereda demam",
+      "Paracetamol",
+      "Antibiotik",
+      "Vitamin C",
+      "Sirup batuk",
+      "Salep antiseptik",
+      "Antihistamin",
+      "Analgesik",
+      "Obat maag",
+      "Obat tetes mata",
     ]);
 
     const keluhan = faker.helpers.arrayElement([
@@ -244,35 +221,36 @@ export class PlaywrightEditFormPage {
       "Mata merah, perih",
     ]);
 
-    const tgl_pemeriksaan = faker.date.recent().toISOString().split("T")[0];
+    const tgl_periksa = faker.date
+      .birthdate({ min: 18, max: 65, mode: "age" })
+      .toISOString()
+      .split("T")[0];
 
-    const ket_tindakan = faker.helpers.arrayElement([
-      "Pembedahan kecil untuk pengangkatan benjolan",
-      "Operasi caesar",
-      "Tindakan rontgen",
-      "Endoskopi saluran cerna",
-      "Pemeriksaan darah lengkap",
-      "CT Scan",
-      "Dialisis ginjal",
-      "Laparoskopi",
-      "Pembersihan luka",
-      "Fisioterapi",
+    const status = faker.helpers.arrayElement([
+      "Sudah ditangani",
+      "Dalam proses",
+      "Sedang dirawat",
+      "Menunggu pemeriksaan lebih lanjut",
+      "Selesai",
+      "Tunggu hasil lab",
+      "Belum diperiksa",
+      "Perlu rawat inap",
+      "Pulang paksa",
+      "Meninggal dunia",
     ]);
 
-    await this.editRekamMedisButton.click();
-    await this.pasienSelect.selectOption(no_pasien);
-    await this.tindakanSelect.selectOption(kd_tindakan);
-    await this.obatSelect.selectOption(kd_obat);
+    await this.pasienSelect.selectOption({ label: "John Doe" });
+    await this.tindakanSelect.selectOption({ label: "Pemeriksaan Umum" });
+    await this.obatInput.selectOption({ label: "Paracetamol" });
     await this.diagnosaInput.fill(diagnosa);
-    await this.resepTextarea.fill(resep);
+    await this.resepTextarea.fill(obat);
     await this.keluhanInput.fill(keluhan);
-    await this.tanggalPemeriksaanInput.fill(tgl_pemeriksaan);
-    await this.keteranganTextarea.fill(ket_tindakan);
-    await this.updateRekamMedisButton.click();
+    await this.tanggalPemeriksaanInput.fill(tgl_periksa);
+    await this.keteranganTextarea.fill(status);
+    await this.submitRekamMedisButton.click();
   }
 
-  async editTindakan() {
-    const nm_tindkan = faker.helpers.arrayElement(["Pemeriksaan Umum"]);
+  async isiFormTindakan() {
     const ket_tindakan = faker.helpers.arrayElement([
       "Pembedahan kecil untuk pengangkatan benjolan",
       "Operasi caesar",
@@ -286,13 +264,12 @@ export class PlaywrightEditFormPage {
       "Fisioterapi",
     ]);
 
-    await this.editTindakanButton.click();
-    await this.namaTindakanInput.fill(nm_tindkan);
+    await this.namaTindakanInput.fill("Pemeriksaan Umum");
     await this.keteranganTindakanTextarea.fill(ket_tindakan);
-    await this.updateTindakanButton.click();
+    await this.submitTindakanButton.click();
   }
 
-  async editObat() {
+  async isiFormObat() {
     const namaObat = faker.helpers.arrayElement([
       "Paracetamol",
       "Vitamin C",
@@ -322,19 +299,20 @@ export class PlaywrightEditFormPage {
 
     const hargaObat = faker.string.numeric(2);
 
-    await this.editObatButton.click();
     await this.nmObatInput.fill(namaObat);
     await this.jmlObatInput.fill(jumObat);
     await this.ukuranInput.fill(ukuranObat);
     await this.hargaInput.fill(hargaObat);
-    await this.updateobatButton.click();
+    await this.submitObatButton.click();
   }
 
-  async editKunjungan() {
+  async isiFormKunjungan() {
     const nm_poli = faker.helpers.arrayElement([
       "poli gigi",
       "poli anak",
       "poli mata",
+      "poli gizi",
+      "poli jiwa",
     ]);
 
     const tgl_kunjungan = faker.date
@@ -351,19 +329,19 @@ export class PlaywrightEditFormPage {
       .split("T")[1]
       .slice(0, 8);
 
-    await this.editKunjunganButton.click();
     await this.noPasienSelect.selectOption("John Doe");
     await this.kdPoliSelect.selectOption(nm_poli);
     await this.tglKunjunganInput.fill(tgl_kunjungan);
     await this.jamKunjunganInput.fill(jam_kunjungan);
-    await this.updatekunjunganButton.click();
+    await this.submitKunjunganButton.click();
   }
 
-  async editDokter() {
+  async isiFormDokter() {
     const nm_poli = faker.helpers.arrayElement([
       "poli gigi",
       "poli mata",
       "poli anak",
+      "poli gizi",
     ]);
 
     const tgl_kunjungan = faker.date
@@ -376,7 +354,6 @@ export class PlaywrightEditFormPage {
     const no_telp = faker.phone.number({ style: "human" });
     const alamat = faker.location.streetAddress();
 
-    await this.editDokterButton.click();
     await this.namaDokterInput.fill(faker.name.fullName());
     await this.pilihPoliSelect.selectOption(nm_poli);
     await this.sipInput.fill(sip);
@@ -384,10 +361,10 @@ export class PlaywrightEditFormPage {
     await this.dokterTempatLahirInput.fill(faker.address.city());
     await this.dokterNoTelpInput.fill(no_telp);
     await this.dokterAlamatInput.fill(alamat);
-    await this.updatedokterButton.click();
+    await this.submitDokterButton.click();
   }
 
-  async editPoliklinik() {
+  async isiFormPoliklinik() {
     const nm_poli = faker.helpers.arrayElement([
       "poli jiwa",
       "poli si",
@@ -396,14 +373,20 @@ export class PlaywrightEditFormPage {
 
     const lantai = faker.string.numeric(1);
 
-    await this.editPoliklinikButton.click();
     await this.namaPoliInput.fill(nm_poli);
     await this.poliLantaiInput.fill(lantai);
-    await this.updatepoliklinikButton.click();
+    await this.submitPoliButton.click();
   }
 
-  async editLaboratorium() {
-    const rk_medis = faker.helpers.arrayElement(["75", "76", "91", "97"]);
+  async isiFormLaboratorium() {
+    const rk_medis = faker.helpers.arrayElement([
+      "75",
+      "76",
+      "91",
+      "97",
+      "100",
+      "105",
+    ]);
 
     const hasil_lab = faker.helpers.arrayElement([
       "Hemoglobin: Normal",
@@ -421,10 +404,9 @@ export class PlaywrightEditFormPage {
       "Rujukan ke dokter spesialis",
     ]);
 
-    await this.editLaboratoriumButton.click();
     await this.rekamMedisInput.selectOption(rk_medis);
     await this.hasilLabInput.fill(hasil_lab);
     await this.keteranganInput.fill(ket);
-    await this.updatelaboratoriumButton.click();
+    await this.submitLaboratoriumButton.click();
   }
 }

@@ -1,21 +1,22 @@
 import { test as base, BrowserContext, Page, expect } from "@playwright/test";
 import { PlaywrightLoginPage } from "./auth/login";
+import { PlaywrightLogoutPage } from "./auth/logout";
 import { PlaywrightDashboardPage } from "./dashboard/dashboard";
 import { PlaywrightSidebarPage } from "./dashboard/sidebar";
-import { PlaywrightIsianFormPage } from "./dashboard/isiform";
+import { PlaywrightIsianFormPage } from "./dashboard/table.ts/isiform";
 import { PlaywrightDetailPage } from "./dashboard/detail";
-import { PlaywrightEditFormPage } from "./dashboard/edit";
+import { PlaywrightEditFormPage } from "./dashboard/table.ts/edit";
 import { PlaywrightDeletePage } from "./dashboard/delete";
 
 let context: BrowserContext;
 let page: Page;
 
-const username = "admin";
-const password = "admin123";
-
 const test = base.extend({
   loginPage: async ({}, use) => {
     await use(new PlaywrightLoginPage(page));
+  },
+  logoutPage: async ({}, use) => {
+    await use(new PlaywrightLogoutPage(page));
   },
   dashboardPage: async ({}, use) => {
     await use(new PlaywrightDashboardPage(page));
@@ -37,8 +38,11 @@ const test = base.extend({
   },
 });
 
-test.describe("RekamMedis_Alivia", () => {
+test.describe("Admin_RekamMedis_Alivia", () => {
   //test.setTimeout(30000);
+
+  const username = "admin";
+  const password = "admin123";
 
   test.beforeAll(async ({ browser }) => {
     context = await browser.newContext();
@@ -57,6 +61,10 @@ test.describe("RekamMedis_Alivia", () => {
   test.beforeEach(async ({ browser }) => {
     await page.goto("/dashboard");
     await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
   });
 
   test("User Dashboard Page", async ({ dashboardPage }) => {
@@ -275,7 +283,5 @@ test.describe("RekamMedis_Alivia", () => {
   test("Delete Laboratorium Page", async ({ sidebarPage, deletePage }) => {
     await sidebarPage.cekLaboratorium();
     await deletePage.deleteLaboratorium();
-
-    console.log("test initial commit");
   });
 });
