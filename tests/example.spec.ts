@@ -454,3 +454,58 @@ test.describe("Perawat_RekamMedis_Alivia", () => {
     await detailPage.bacaDataKunjungan();
   });
 });
+
+test.describe("Farmasi_RekamMedis_Alivia", () => {
+  const username = "Farmasi";
+  const password = "farmasi123";
+
+  test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await browser.newPage();
+    const loginPage = new PlaywrightLoginPage(page);
+
+    await page.goto("/login");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin(username, password);
+  });
+
+  test.afterEach(async () => {
+    console.log("Test finished.");
+  });
+
+  test.beforeEach(async ({ browser }) => {
+    await page.goto("/dashboard");
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
+  });
+
+  test("User Dashboard Page", async ({ dashboardPage }) => {
+    await dashboardPage.header();
+  });
+
+  test("Detail Obat Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekObat();
+    await detailPage.bacaDataObat();
+  });
+
+  test("Create Obat Page", async ({ sidebarPage, dashboardPage, isiPage }) => {
+    await sidebarPage.cekObat();
+    await dashboardPage.obat();
+    await dashboardPage.checkTambahObat();
+    await isiPage.isiFormObat();
+    await dashboardPage.obat();
+  });
+
+  test("Update Obat Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekObat();
+    await editPage.editObat();
+  });
+
+  test("Delete Obat Page", async ({ sidebarPage, deletePage }) => {
+    await sidebarPage.cekObat();
+    await deletePage.deleteObat();
+  });
+});
