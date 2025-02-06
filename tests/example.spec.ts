@@ -39,8 +39,6 @@ const test = base.extend({
 });
 
 test.describe("Admin_RekamMedis_Alivia", () => {
-  //test.setTimeout(30000);
-
   const username = "admin";
   const password = "admin123";
 
@@ -385,5 +383,74 @@ test.describe("Dokter_RekamMedis_Alivia", () => {
   test("Detail Laboratorium Page", async ({ sidebarPage, detailPage }) => {
     await sidebarPage.cekLaboratorium();
     await detailPage.bacaDataLaboratorium();
+  });
+});
+
+test.describe("Perawat_RekamMedis_Alivia", () => {
+  const username = "perawat";
+  const password = "perawat123";
+
+  test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await browser.newPage();
+    const loginPage = new PlaywrightLoginPage(page);
+
+    await page.goto("/login");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin(username, password);
+  });
+
+  test.afterEach(async () => {
+    console.log("Test finished.");
+  });
+
+  test.beforeEach(async ({ browser }) => {
+    await page.goto("/dashboard");
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
+  });
+
+  test("User Dashboard Page", async ({ dashboardPage }) => {
+    await dashboardPage.header();
+  });
+
+  test("Detail Rekam Medis Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekRekamMedis();
+    await detailPage.bacaDataRekamMedis();
+  });
+
+  test("Create Tindakan Page", async ({
+    sidebarPage,
+    dashboardPage,
+    isiPage,
+  }) => {
+    await sidebarPage.cekTindakan();
+    await dashboardPage.tindakan();
+    await dashboardPage.checkTambahTindakan();
+    await isiPage.isiFormTindakan();
+    await dashboardPage.tindakan();
+  });
+
+  test("Detail Tindakan Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekTindakan();
+    await detailPage.bacaDataTindakan();
+  });
+
+  test("Update Tindakan Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekTindakan();
+    await editPage.editTindakan();
+  });
+
+  test("Delete Tindakan Page", async ({ sidebarPage, deletePage }) => {
+    await sidebarPage.cekTindakan();
+    await deletePage.deleteTindakan();
+  });
+
+  test("Detail Kunjungan Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekKunjungan();
+    await detailPage.bacaDataKunjungan();
   });
 });
