@@ -364,6 +364,7 @@ export class PlaywrightEditFormPage {
       "poli gigi",
       "poli mata",
       "poli anak",
+      "poli jiwa",
     ]);
 
     const tgl_kunjungan = faker.date

@@ -456,7 +456,7 @@ test.describe("Perawat_RekamMedis_Alivia", () => {
 });
 
 test.describe("Farmasi_RekamMedis_Alivia", () => {
-  const username = "Farmasi";
+  const username = "farmasi";
   const password = "farmasi123";
 
   test.beforeAll(async ({ browser }) => {
@@ -507,5 +507,106 @@ test.describe("Farmasi_RekamMedis_Alivia", () => {
   test("Delete Obat Page", async ({ sidebarPage, deletePage }) => {
     await sidebarPage.cekObat();
     await deletePage.deleteObat();
+  });
+});
+
+test.describe("Laboratorium_RekamMedis_Alivia", () => {
+  const username = "laboratorium";
+  const password = "laboratorium123";
+
+  test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await browser.newPage();
+    const loginPage = new PlaywrightLoginPage(page);
+
+    await page.goto("/login");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin(username, password);
+  });
+
+  test.afterEach(async () => {
+    console.log("Test finished.");
+  });
+
+  test.beforeEach(async ({ browser }) => {
+    await page.goto("/dashboard");
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
+  });
+
+  test("User Dashboard Page", async ({ dashboardPage }) => {
+    await dashboardPage.header();
+  });
+
+  test("Create Laboratorium Page", async ({
+    sidebarPage,
+    dashboardPage,
+    isiPage,
+  }) => {
+    await sidebarPage.cekLaboratorium();
+    await dashboardPage.laboratorium();
+    await dashboardPage.checkTambahLaboratorium();
+    await isiPage.isiFormLaboratorium();
+    await dashboardPage.laboratorium();
+  });
+
+  test("Detail Laboratorium Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekLaboratorium();
+    await detailPage.bacaDataLaboratorium();
+  });
+
+  test("Update Laboratorium Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekLaboratorium();
+    await editPage.editLaboratorium();
+  });
+
+  test("Delete Laboratorium Page", async ({ sidebarPage, deletePage }) => {
+    await sidebarPage.cekLaboratorium();
+    await deletePage.deleteLaboratorium();
+  });
+
+  test("Detail Rekam Medis Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekRekamMedis();
+    await detailPage.bacaDataRekamMedis();
+  });
+});
+
+test.describe("Pasien_RekamMedis_Alivia", () => {
+  const username = "pasien";
+  const password = "pasien123";
+
+  test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await browser.newPage();
+    const loginPage = new PlaywrightLoginPage(page);
+
+    await page.goto("/login");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin(username, password);
+  });
+
+  test.afterEach(async () => {
+    console.log("Test finished.");
+  });
+
+  test.beforeEach(async ({ browser }) => {
+    await page.goto("/dashboard");
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
+  });
+
+  test("User Dashboard Page", async ({ dashboardPage }) => {
+    await dashboardPage.header();
+  });
+
+  test("Detail Rekam Medis Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekRekamMedis();
+    await detailPage.bacaDataRekamMedis();
   });
 });
