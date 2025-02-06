@@ -285,3 +285,105 @@ test.describe("Admin_RekamMedis_Alivia", () => {
     await deletePage.deleteLaboratorium();
   });
 });
+
+test.describe("Dokter_RekamMedis_Alivia", () => {
+  //test.setTimeout(30000);
+
+  const username = "dokter";
+  const password = "dokter123";
+
+  test.beforeAll(async ({ browser }) => {
+    context = await browser.newContext();
+    page = await browser.newPage();
+    const loginPage = new PlaywrightLoginPage(page);
+
+    await page.goto("/login");
+    await loginPage.toLoginPage();
+    await loginPage.inputLogin(username, password);
+  });
+
+  test.afterEach(async () => {
+    console.log("Test finished.");
+  });
+
+  test.beforeEach(async ({ browser }) => {
+    await page.goto("/dashboard");
+    await expect(page).toHaveURL("/dashboard");
+  });
+
+  test.afterAll(async ({ logoutPage }) => {
+    await logoutPage.toLogoutPage();
+  });
+
+  test("User Dashboard Page", async ({ dashboardPage }) => {
+    await dashboardPage.header();
+  });
+
+  test("Detail Pasien Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekPasien();
+    await detailPage.bacaDataPasien();
+  });
+
+  test("Update Pasien Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekPasien();
+    await editPage.editPasien();
+  });
+
+  test("Create Tindakan Page", async ({
+    sidebarPage,
+    dashboardPage,
+    isiPage,
+  }) => {
+    await sidebarPage.cekTindakan();
+    await dashboardPage.tindakan();
+    await dashboardPage.checkTambahTindakan();
+    await isiPage.isiFormTindakan();
+    await dashboardPage.tindakan();
+  });
+
+  test("Detail Tindakan Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekTindakan();
+    await detailPage.bacaDataTindakan();
+  });
+
+  test("Update Tindakan Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekTindakan();
+    await editPage.editTindakan();
+  });
+
+  test("Delete Tindakan Page", async ({ sidebarPage, deletePage }) => {
+    await sidebarPage.cekTindakan();
+    await deletePage.deleteTindakan();
+  });
+
+  test("Create Kunjungan Page", async ({
+    sidebarPage,
+    dashboardPage,
+    isiPage,
+  }) => {
+    await sidebarPage.cekKunjungan();
+    await dashboardPage.kunjungan();
+    await dashboardPage.checkTambahKunjungan();
+    await isiPage.isiFormKunjungan();
+  });
+
+  test("Detail Kunjungan Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekKunjungan();
+    await detailPage.bacaDataKunjungan();
+  });
+
+  test("Update Kunjungan Page", async ({ sidebarPage, editPage }) => {
+    await sidebarPage.cekKunjungan();
+    await editPage.editKunjungan();
+  });
+
+  test("Delete Kunjungan Page", async ({ sidebarPage, deletePage }) => {
+    await sidebarPage.cekKunjungan();
+    await deletePage.deleteKunjungan();
+  });
+
+  test("Detail Laboratorium Page", async ({ sidebarPage, detailPage }) => {
+    await sidebarPage.cekLaboratorium();
+    await detailPage.bacaDataLaboratorium();
+  });
+});
