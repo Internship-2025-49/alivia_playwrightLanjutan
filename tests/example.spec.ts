@@ -7,6 +7,16 @@ import { PlaywrightIsianFormPage } from "./dashboard/table.ts/isiform";
 import { PlaywrightDetailPage } from "./dashboard/detail";
 import { PlaywrightEditFormPage } from "./dashboard/table.ts/edit";
 import { PlaywrightDeletePage } from "./dashboard/delete";
+import {
+  dokterValue,
+  kunjunganValue,
+  labValue,
+  obatValue,
+  pasienValue,
+  poliklinikValue,
+  rekamMedisValue,
+  tindakanValue,
+} from "./faker/faker";
 
 let context: BrowserContext;
 let page: Page;
@@ -78,7 +88,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
     await sidebarPage.cekPasien();
     await dashboardPage.pasien();
     await dashboardPage.checkTambahPasien();
-    await isiPage.isiFormPasien();
+    await isiPage.isiFormPasien(pasienValue);
     await dashboardPage.pasien();
   });
 
@@ -89,7 +99,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Pasien Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekPasien();
-    await editPage.editPasien();
+    await editPage.editPasien(pasienValue);
   });
 
   test("Delete Pasien Page", async ({ sidebarPage, deletePage }) => {
@@ -116,11 +126,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Rekam Medis Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekRekamMedis();
-    await editPage.editRekamMedis(
-      "John Doe",
-      "Pemeriksaan Umum",
-      "Paracetamol"
-    );
+    await editPage.editRekamMedis(rekamMedisValue);
   });
 
   test("Delete Rekam Medis Page", async ({ sidebarPage, deletePage }) => {
@@ -147,7 +153,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Tindakan Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekTindakan();
-    await editPage.editTindakan();
+    await editPage.editTindakan(tindakanValue);
   });
 
   test("Delete Tindakan Page", async ({ sidebarPage, deletePage }) => {
@@ -170,7 +176,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Obat Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekObat();
-    await editPage.editObat();
+    await editPage.editObat(tindakanValue);
   });
 
   test("Delete Obat Page", async ({ sidebarPage, deletePage }) => {
@@ -196,7 +202,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Kunjungan Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekKunjungan();
-    await editPage.editKunjungan();
+    await editPage.editKunjungan(kunjunganValue);
   });
 
   test("Delete Kunjungan Page", async ({ sidebarPage, deletePage }) => {
@@ -222,7 +228,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Dokter Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekDokter();
-    await editPage.editDokter();
+    await editPage.editDokter(dokterValue);
   });
 
   test("Delete Dokter Page", async ({ sidebarPage, deletePage }) => {
@@ -248,7 +254,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Poliklinik Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekPoliKlinik();
-    await editPage.editPoliklinik();
+    await editPage.editPoliklinik(poliklinikValue);
   });
 
   test("Delete Poliklinik Page", async ({ sidebarPage, deletePage }) => {
@@ -275,7 +281,7 @@ test.describe("Admin_RekamMedis_Alivia", () => {
 
   test("Update Laboratorium Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekLaboratorium();
-    await editPage.editLaboratorium();
+    await editPage.editLaboratorium(labValue);
   });
 
   test("Delete Laboratorium Page", async ({ sidebarPage, deletePage }) => {
@@ -324,7 +330,7 @@ test.describe("Dokter_RekamMedis_Alivia", () => {
 
   test("Update Pasien Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekPasien();
-    await editPage.editPasien();
+    await editPage.editPasien(pasienValue);
   });
 
   test("Create Tindakan Page", async ({
@@ -346,7 +352,7 @@ test.describe("Dokter_RekamMedis_Alivia", () => {
 
   test("Update Tindakan Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekTindakan();
-    await editPage.editTindakan();
+    await editPage.editTindakan(tindakanValue);
   });
 
   test("Delete Tindakan Page", async ({ sidebarPage, deletePage }) => {
@@ -372,7 +378,7 @@ test.describe("Dokter_RekamMedis_Alivia", () => {
 
   test("Update Kunjungan Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekKunjungan();
-    await editPage.editKunjungan();
+    await editPage.editKunjungan(kunjunganValue);
   });
 
   test("Delete Kunjungan Page", async ({ sidebarPage, deletePage }) => {
@@ -441,7 +447,7 @@ test.describe("Perawat_RekamMedis_Alivia", () => {
 
   test("Update Tindakan Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekTindakan();
-    await editPage.editTindakan();
+    await editPage.editTindakan(tindakanValue);
   });
 
   test("Delete Tindakan Page", async ({ sidebarPage, deletePage }) => {
@@ -501,7 +507,7 @@ test.describe("Farmasi_RekamMedis_Alivia", () => {
 
   test("Update Obat Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekObat();
-    await editPage.editObat();
+    await editPage.editObat(obatValue);
   });
 
   test("Delete Obat Page", async ({ sidebarPage, deletePage }) => {
@@ -597,7 +603,7 @@ test.describe("Laboratorium_RekamMedis_Alivia", () => {
 
   test("Update Laboratorium Page", async ({ sidebarPage, editPage }) => {
     await sidebarPage.cekLaboratorium();
-    await editPage.editLaboratorium();
+    await editPage.editLaboratorium(labValue);
   });
 
   test("Delete Laboratorium Page", async ({ sidebarPage, deletePage }) => {

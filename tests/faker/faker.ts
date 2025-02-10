@@ -1,26 +1,16 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { faker } from "@faker-js/faker/locale/id_ID";
-
-enum Keluarga {
-  Ayah = "Ayah",
-  Ibu = "Ibu",
-  Adek = "Adek",
-  Kakak = "Kakak",
-  Saudara = "Saudara",
-}
-
-interface Pasien {
-  nama_pasien: string;
-  j_kel: string;
-  agama: string;
-  alamat: string;
-  tgl_lahir: string;
-  usia: string;
-  no_telp: number;
-  nama_kk: string;
-  hub_kel: string;
-  list_keluarga: Keluarga;
-}
+import {
+  typeKunjungan,
+  typeObat,
+  typePasien,
+  typeRekamMedis,
+  typeTindakan,
+  typeDokter,
+  typePoliklinik,
+  typeLaboratorium,
+} from "../type/type";
+import { ECDH } from "crypto";
 
 export const keluhan = faker.helpers.arrayElement([
   "Sakit kepala, demam",
@@ -36,11 +26,13 @@ export const keluhan = faker.helpers.arrayElement([
 ]);
 
 export const nama_pasien = faker.person.fullName();
+
 enum JenKel {
   Laki = "Laki-laki",
   Perempuan = "Perempuan",
 }
 export const j_kel = faker.helpers.enumValue(JenKel);
+
 enum kepercayaan {
   Islam = "Islam",
   Hindu = "Hindu",
@@ -57,6 +49,14 @@ export const tgl_lahir = faker.date
 export const usia = faker.string.numeric(2);
 export const no_telp = faker.phone.number({ style: "human" });
 export const nama_kk = faker.person.lastName();
+
+enum Keluarga {
+  Ayah = "Ayah",
+  Ibu = "Ibu",
+  Adek = "Adek",
+  Kakak = "Kakak",
+  Saudara = "Saudara",
+}
 
 export const hub_kel = faker.helpers.enumValue(Keluarga);
 
@@ -103,7 +103,7 @@ export const ket_tindakan = faker.helpers.arrayElement([
   "Fisioterapi",
 ]);
 
-export const nm_tindkan = faker.helpers.arrayElement(["Pemeriksaan Umum"]);
+export const nm_tindakan = faker.helpers.arrayElement(["Pemeriksaan Umum"]);
 
 export const namaObat = faker.helpers.arrayElement([
   "Paracetamol",
@@ -157,6 +157,10 @@ export const nm_poli = faker.helpers.arrayElement([
   "poli gizi",
 ]);
 
+export const nama_dokter = faker.name.fullName();
+
+export const tmp_lahir = faker.address.city();
+
 export const sip = faker.string.numeric(10);
 
 export const lantai = faker.string.numeric(1);
@@ -209,3 +213,66 @@ export const status = faker.helpers.arrayElement([
   "Pulang paksa",
   "Meninggal dunia",
 ]);
+
+export const rekamMedisValue: typeRekamMedis = {
+  no_pasien: "John Doe",
+  kd_tindakan: "Pemeriksaan Umum",
+  kd_obat: "Paracetamol",
+  diagnosa: diagnosa,
+  resep: resep,
+  keluhan: keluhan,
+  tgl_pemeriksaan: tgl_pemeriksaan,
+  ket_tindakan: ket_tindakan,
+};
+
+export const pasienValue: typePasien = {
+  nm_pasien: nama_pasien,
+  j_kel: j_kel,
+  agama: agama,
+  alamat: alamat,
+  tgl_lahir: tgl_lahir,
+  usia: usia,
+  no_telp: no_telp,
+  nama_kk: nama_kk,
+  hub_kel: hub_kel,
+};
+
+export const tindakanValue: typeTindakan = {
+  ket_tindakan: ket_tindakan,
+  nm_tindakan: nm_tindakan,
+};
+
+export const obatValue: typeObat = {
+  namaObat: namaObat,
+  jumObat: jumObat,
+  ukuranObat: ukuranObat,
+  hargaObat: hargaObat,
+};
+
+export const kunjunganValue: typeKunjungan = {
+  no_pasien: "John Doe",
+  nm_poli: nm_poli,
+  tgl_kunjungan: tgl_kunjungan,
+  jam_kunjungan: jam_kunjungan,
+};
+
+export const dokterValue: typeDokter = {
+  nama_dokter: nama_dokter,
+  sip: sip,
+  nm_poli: nm_poli,
+  tgl_kunjungan: tgl_kunjungan,
+  no_telp: no_telp,
+  alamat: alamat,
+  tmp_lahir: tmp_lahir,
+};
+
+export const poliklinikValue: typePoliklinik = {
+  nm_poli: nm_poli,
+  lantai: lantai,
+};
+
+export const labValue: typeLaboratorium = {
+  rk_medis: rk_medis,
+  hasil_lab: hasil_lab,
+  ket: ket,
+};

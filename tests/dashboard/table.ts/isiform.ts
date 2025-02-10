@@ -15,7 +15,7 @@ import {
   nama_kk,
   nama_pasien,
   nm_poli,
-  nm_tindkan,
+  nm_tindakan,
   no_telp,
   resep,
   sip,
@@ -30,7 +30,9 @@ import {
   rk_medis,
   obat,
   tgl_periksa,
+  status,
 } from "../../faker/faker";
+import { typePasien } from "../../type/type";
 
 export class PlaywrightIsianFormPage {
   readonly page: Page;
@@ -165,16 +167,16 @@ export class PlaywrightIsianFormPage {
     this.submitLaboratoriumButton = page.locator('button[type="submit"]');
   }
 
-  async isiFormPasien() {
-    await this.namaPasienInput.fill(nama_pasien);
-    await this.jenisKelaminSelect.selectOption(j_kel);
-    await this.agamaSelect.selectOption(agama);
-    await this.alamatTextarea.fill(alamat);
-    await this.tanggalLahirInput.fill(tgl_lahir);
-    await this.usiaInput.fill(usia);
-    await this.nomorTeleponInput.fill(no_telp);
-    await this.namaKKInput.fill(nama_kk);
-    await this.hubunganKeluargaInput.fill(hub_kel);
+  async isiFormPasien(isiPasien: typePasien) {
+    await this.namaPasienInput.fill(isiPasien.nm_pasien);
+    await this.jenisKelaminSelect.selectOption(isiPasien.j_kel);
+    await this.agamaSelect.selectOption(isiPasien.agama);
+    await this.alamatTextarea.fill(isiPasien.alamat);
+    await this.tanggalLahirInput.fill(isiPasien.tgl_lahir);
+    await this.usiaInput.fill(isiPasien.usia);
+    await this.nomorTeleponInput.fill(isiPasien.no_telp);
+    await this.namaKKInput.fill(isiPasien.nama_kk);
+    await this.hubunganKeluargaInput.fill(isiPasien.hub_kel);
     await this.submitPasienButton.click();
   }
 

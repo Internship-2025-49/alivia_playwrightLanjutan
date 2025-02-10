@@ -15,7 +15,7 @@ import {
   nama_kk,
   nama_pasien,
   nm_poli,
-  nm_tindkan,
+  nm_tindakan,
   no_telp,
   resep,
   sip,
@@ -29,7 +29,16 @@ import {
   ket,
   rk_medis,
 } from "../../faker/faker";
-import { RekamMedis } from "../../type/type";
+import {
+  typePasien,
+  typeRekamMedis,
+  typeTindakan,
+  typeObat,
+  typeDokter,
+  typeKunjungan,
+  typeLaboratorium,
+  typePoliklinik,
+} from "../../type/type";
 
 export class PlaywrightEditFormPage {
   readonly page: Page;
@@ -184,82 +193,82 @@ export class PlaywrightEditFormPage {
     this.updatelaboratoriumButton = page.locator('button[type="submit"]');
   }
 
-  async editPasien() {
+  async editPasien(pasien: typePasien) {
     await this.editPasienButton.click();
-    await this.namaPasienInput.fill(nama_pasien);
-    await this.jenisKelaminSelect.selectOption(j_kel);
-    await this.agamaSelect.selectOption(agama);
-    await this.alamatTextarea.fill(alamat);
-    await this.tanggalLahirInput.fill(tgl_lahir);
-    await this.usiaInput.fill(usia);
-    await this.nomorTeleponInput.fill(no_telp);
-    await this.namaKKInput.fill(nama_kk);
-    await this.hubunganKeluargaInput.fill(hub_kel);
+    await this.namaPasienInput.fill(pasien.nm_pasien);
+    await this.jenisKelaminSelect.selectOption(pasien.j_kel);
+    await this.agamaSelect.selectOption(pasien.agama);
+    await this.alamatTextarea.fill(pasien.alamat);
+    await this.tanggalLahirInput.fill(pasien.tgl_lahir);
+    await this.usiaInput.fill(pasien.usia);
+    await this.nomorTeleponInput.fill(pasien.no_telp);
+    await this.namaKKInput.fill(pasien.nama_kk);
+    await this.hubunganKeluargaInput.fill(pasien.hub_kel);
     await this.updatePasienButton.click();
   }
 
-  async editRekamMedis(rekamMedis: RekamMedis) {
+  async editRekamMedis(rekamMedis: typeRekamMedis) {
     await this.editRekamMedisButton.click();
     await this.pasienSelect.selectOption(rekamMedis.no_pasien);
     await this.tindakanSelect.selectOption(rekamMedis.kd_tindakan);
     await this.obatSelect.selectOption(rekamMedis.kd_obat);
-    await this.diagnosaInput.fill(diagnosa);
-    await this.resepTextarea.fill(resep);
-    await this.keluhanInput.fill(keluhan);
-    await this.tanggalPemeriksaanInput.fill(tgl_pemeriksaan);
-    await this.keteranganTextarea.fill(ket_tindakan);
+    await this.diagnosaInput.fill(rekamMedis.diagnosa);
+    await this.resepTextarea.fill(rekamMedis.resep);
+    await this.keluhanInput.fill(rekamMedis.keluhan);
+    await this.tanggalPemeriksaanInput.fill(rekamMedis.tgl_pemeriksaan);
+    await this.keteranganTextarea.fill(rekamMedis.ket_tindakan);
     await this.updateRekamMedisButton.click();
   }
 
-  async editTindakan() {
+  async editTindakan(tindakan: typeTindakan) {
     await this.editTindakanButton.click();
-    await this.namaTindakanInput.fill(nm_tindkan);
-    await this.keteranganTindakanTextarea.fill(ket_tindakan);
+    await this.namaTindakanInput.fill(tindakan.nm_tindakan);
+    await this.keteranganTindakanTextarea.fill(tindakan.ket_tindakan);
     await this.updateTindakanButton.click();
   }
 
-  async editObat() {
+  async editObat(obat: typeObat) {
     await this.editObatButton.click();
-    await this.nmObatInput.fill(namaObat);
-    await this.jmlObatInput.fill(jumObat);
-    await this.ukuranInput.fill(ukuranObat);
-    await this.hargaInput.fill(hargaObat);
+    await this.nmObatInput.fill(obat.namaObat);
+    await this.jmlObatInput.fill(obat.jumObat);
+    await this.ukuranInput.fill(obat.ukuranObat);
+    await this.hargaInput.fill(obat.hargaObat);
     await this.updateobatButton.click();
   }
 
-  async editKunjungan() {
+  async editKunjungan(kunjungan: typeKunjungan) {
     await this.editKunjunganButton.click();
-    await this.noPasienSelect.selectOption("John Doe");
-    await this.kdPoliSelect.selectOption(nm_poli);
-    await this.tglKunjunganInput.fill(tgl_kunjungan);
-    await this.jamKunjunganInput.fill(jam_kunjungan);
+    await this.noPasienSelect.selectOption(kunjungan.no_pasien);
+    await this.kdPoliSelect.selectOption(kunjungan.nm_poli);
+    await this.tglKunjunganInput.fill(kunjungan.tgl_kunjungan);
+    await this.jamKunjunganInput.fill(kunjungan.jam_kunjungan);
     await this.updatekunjunganButton.click();
   }
 
-  async editDokter() {
+  async editDokter(dokter: typeDokter) {
     await this.editDokterButton.click();
-    await this.namaDokterInput.fill(faker.name.fullName());
-    await this.pilihPoliSelect.selectOption(nm_poli);
-    await this.sipInput.fill(sip);
-    await this.dokterKunjunganIput.fill(tgl_kunjungan);
-    await this.dokterTempatLahirInput.fill(faker.address.city());
-    await this.dokterNoTelpInput.fill(no_telp);
-    await this.dokterAlamatInput.fill(alamat);
+    await this.namaDokterInput.fill(dokter.nama_dokter);
+    await this.pilihPoliSelect.selectOption(dokter.nm_poli);
+    await this.sipInput.fill(dokter.sip);
+    await this.dokterKunjunganIput.fill(dokter.tgl_kunjungan);
+    await this.dokterTempatLahirInput.fill(dokter.tmp_lahir);
+    await this.dokterNoTelpInput.fill(dokter.no_telp);
+    await this.dokterAlamatInput.fill(dokter.alamat);
     await this.updatedokterButton.click();
   }
 
-  async editPoliklinik() {
+  async editPoliklinik(poliklinik: typePoliklinik) {
     await this.editPoliklinikButton.click();
-    await this.namaPoliInput.fill(nm_poli);
-    await this.poliLantaiInput.fill(lantai);
+    await this.namaPoliInput.fill(poliklinik.nm_poli);
+    await this.poliLantaiInput.fill(poliklinik.lantai);
     await this.updatepoliklinikButton.click();
   }
 
-  async editLaboratorium() {
+  async editLaboratorium(laboratorium: typeLaboratorium) {
     await this.editLaboratoriumButton.click();
-    await this.rekamMedisInput.selectOption(rk_medis);
-    await this.hasilLabInput.fill(hasil_lab);
-    await this.keteranganInput.fill(ket);
+    await this.rekamMedisInput.selectOption(laboratorium.rk_medis);
+    await this.hasilLabInput.fill(laboratorium.hasil_lab);
+    await this.keteranganInput.fill(laboratorium.ket);
     await this.updatelaboratoriumButton.click();
   }
 }
